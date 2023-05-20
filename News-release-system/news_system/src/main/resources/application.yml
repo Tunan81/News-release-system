@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: sms-demo-server
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    username: root
+    password: 261615
+
+server:
+  port: 9090
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+files:
+  upload:
+    path: D:/files/
+
+sms:
+  aliyun:
+    accessKeyID:  xxx # 你的accessKeyID
+    accessKeySecret:  xxx # 你的accessKeySecret
+    domain: dysmsapi.aliyuncs.com # 固定不变
+    regionId: cn-hangzhou # 固定不变
+    templateCode: 你的验证码是 # 你的模板code
+    signName: xxx # 你的签名
+
+

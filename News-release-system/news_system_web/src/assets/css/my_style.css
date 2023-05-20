@@ -1,0 +1,90 @@
+ul{
+  padding: 0;
+  margin: 0;
+}
+li{
+  list-style: none;
+}
+.ft-20{
+  font-size: 20px;
+}
+.mart5{
+  margin-top: 5px !important;
+}
+.mart10{
+  margin-top: 10px !important;
+}
+.mart15{
+  margin-top: 15px !important;
+}
+.marr10{
+  margin-right: 10px !important;
+}
+.marb5{
+  margin-bottom: 5px !important;
+}
+.marb10{
+  margin-bottom: 10px !important;
+}
+.marb20{
+  margin-bottom: 20px !important;
+}
+.padt10{
+  padding-top:10px !important;
+}
+.flex-v{
+  display: flex;
+}
+.flex-conter{
+  justify-content: center;
+}
+.flex-between{
+  justify-content: space-between;
+}
+.flex-around{
+  justify-content: space-around;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+
+.liPointer {
+  cursor: pointer;
+}
+.liStylenone {
+  list-style: none;
+}
+/* 链接去除下划线 */
+.anone {
+  text-decoration: none;
+}
+/* 蓝色标题 */
+.color {
+  color: rgb(1, 72, 153);
+}
+/* 变小手 */
+.cursor{
+  cursor: pointer;
+}
+.hr{
+  margin: 2px 0;
+  height: 1px;
+  border: none;
+  border-top: 1px;
+}
+.name {
+  font-family: STHeiti;
+  font-size: 30px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.namehr{
+  /* border: 3px solid blue; */
+  height: 2px;
+  background-color: rgb(10, 10, 175);
+  margin-bottom: 20px;
+}

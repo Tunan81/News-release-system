@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flower-forest.iml" filepath="$PROJECT_DIR$/flower-forest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/forest-admin/forest-admin.iml" filepath="$PROJECT_DIR$/forest-admin/forest-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/news_system/news_system.iml" filepath="$PROJECT_DIR$/news_system/news_system.iml" />
+    </modules>
+  </component>
+</project>
