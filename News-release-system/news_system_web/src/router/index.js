@@ -74,6 +74,11 @@ const routes = [
     {
         path:'/',
         redirect:'/userHome/index'　　//默认显示
+    },
+    {
+      path: '/infoUs',
+      name: 'infoUs',
+        component: () => import('../views/front/InfoUs.vue')
     }
 
 ]

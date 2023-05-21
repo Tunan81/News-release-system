@@ -47,9 +47,8 @@ public class NewsController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
-        newsService.removeById(id);
-        return Result.success();
+    public Boolean delete(@PathVariable Integer id) {
+        return newsService.removeById(id);
     }
 
     /**

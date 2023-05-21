@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import team.tunan.common.DisplayContent;
 
 /**
  * <p>
@@ -38,7 +39,7 @@ public class NewsCategory implements Serializable {
     private Integer newsTypeId;
 
     @ApiModelProperty("分类展示内容")
-    private String displayContent;
+    private DisplayContent displayContent;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;

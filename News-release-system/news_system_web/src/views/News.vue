@@ -45,7 +45,7 @@
                 :active-value="1"
                 :inactive-value="0"
                 v-model="scope.row.status"
-                @change="updateState(scope.row)">
+                @change="">
             </el-switch>
           </p>
         </template>
@@ -57,7 +57,7 @@
                 :active-value="1"
                 :inactive-value="0"
                 v-model="scope.row.top"
-                @change="updateState(scope.row)">
+                @change="">
             </el-switch>
           </p>
         </template>
@@ -72,7 +72,7 @@
               icon="el-icon-info"
               iconColor="red"
               title="您确定删除吗？"
-              @confirm="del(scope.row.userId)">
+              @confirm="del(scope.row.nid)">
             <el-button type="danger" slot="reference">删除<i class="el-icon-delete"></i></el-button>
           </el-popconfirm>
         </temple>
@@ -159,16 +159,6 @@ export default {
         }
       })
     },
-    updateState(row) {
-      this.request.put("/news", row).then(res => {
-        if (res) {
-          this.$message.success("更新成功")
-          this.load()
-        } else {
-          this.$message.error("更新失败")
-        }
-      })
-    },
     handleAdd() {
       this.dialogFormVisible = true
       this.form = {}
@@ -177,8 +167,9 @@ export default {
       this.form = row
       this.dialogFormVisible = true
     },
-    del(userId) {
-      this.request.delete("/news/" + userId).then(res => {
+    del(nid) {
+      console.log(nid)
+      this.request.delete("/news/" + nid).then(res => {
         if (res) {
           this.$message.success("删除成功")
           this.load()
@@ -194,7 +185,7 @@ export default {
       this.load()
     },
     delBatch() {
-      let ids = this.multipleSelection.map(v => v.userId)
+      let ids = this.multipleSelection.map(v => v.nid)
       this.request.post("/news/del/batch/", ids).then(res => {
         if (res) {
           this.$message.success("批量删除成功")
