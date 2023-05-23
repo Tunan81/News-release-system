@@ -34,6 +34,9 @@ const routes = [
             {path: 'competition', name: 'Competition', component: () => import('../views/front/page/Competition.vue')},
             {path: 'history', name: 'History', component: () => import('../views/front/page/History.vue')},
             {path: 'services', name: 'Services', component: () => import('../views/front/page/Services.vue')},
+            {path: 'news', name: 'News', component: () => import('../views/front/page/News.vue'),},
+            {path: 'moreMessage', name: 'moreMessage', component: () => import('../views/front/page/moreMessage.vue')},
+
         ]
     },
     {
@@ -79,7 +82,12 @@ const routes = [
       path: '/infoUs',
       name: 'infoUs',
         component: () => import('../views/front/InfoUs.vue')
-    }
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: () => import('../views/front/test.vue')
+    },
 
 ]
 
@@ -98,7 +106,9 @@ export const setRoutes = () => {
             name: 'Manage',
             component: () => import('../views/Manage.vue'),
             redirect: "/home",
-            children: []
+            children: [
+                {path: 'person', name: '', component: () => import('../views/person.vue')},
+            ]
         }
         const menus = JSON.parse(storeMenus)
         menus.forEach(item => {

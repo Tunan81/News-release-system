@@ -9,7 +9,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import team.tunan.common.Constants;
 import team.tunan.common.Result;
-import team.tunan.controller.dto.UserDTO;
+import team.tunan.dto.UserDTO;
 import team.tunan.entity.User;
 import team.tunan.service.IUserService;
 

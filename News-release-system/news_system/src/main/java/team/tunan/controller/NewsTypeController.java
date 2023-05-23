@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-05-20
  */
 @RestController
-@RequestMapping("/news-type")
+@RequestMapping("/newsType")
 public class NewsTypeController {
 
     @Resource

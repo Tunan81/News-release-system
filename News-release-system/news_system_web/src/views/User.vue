@@ -143,7 +143,7 @@ export default {
       tableData: [],
       total: 0,
       pageNum: 1,
-      pageSize: 5,
+      pageSize: 10,
       username: "",
       userId: "",
       sex: "",

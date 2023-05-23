@@ -3,8 +3,8 @@
     <div style="flex: 1;">
       <span :class="collapseBtnClass" style="cursor: pointer; font-size: 18px" @click="collapse"></span>
       <el-breadcrumb separator="/" style="display: inline-block; margin-left: 10px">
-        <el-breadcrumb-item :to="'/'">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="'/'">{{ $route.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="'/home'">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ $route.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <el-dropdown style="width: 100px; cursor: pointer">

@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-openeds="['2','3','4']" style="min-height: 100%; overflow-x: hidden"
+  <el-menu :default-openeds="opens" style="min-height: 100%; overflow-x: hidden"
            background-color="rgb(48,65,86)"
            text-color="#fff"
            active-text-color="#ffd04b"
@@ -83,5 +83,18 @@ export default {
 </script>
 
 <style scoped>
+.el-menu-item.is-active {
+  background-color: rgb(38, 52, 69) !important;
+}
+.el-menu-item:hover {
+  background-color: rgb(38, 52, 69) !important;
+}
 
+.el-submenu__title:hover {
+  background-color: rgb(38, 52, 69) !important;
+}
+/*解决收缩菜单文字不消失问题*/
+.el-menu--collapse span {
+  visibility: hidden;
+}
 </style>

@@ -2,12 +2,15 @@ package team.tunan.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import team.tunan.common.Result;
 
+import team.tunan.dto.NewsTypeCategoryDTO;
+import team.tunan.mapper.NewsTypeCategoryMapper;
 import team.tunan.service.INewsCategoryService;
 import team.tunan.entity.NewsCategory;
 
@@ -22,11 +25,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-05-20
  */
 @RestController
-@RequestMapping("/news-category")
+@RequestMapping("/newsCategory")
 public class NewsCategoryController {
 
     @Resource
     private INewsCategoryService newsCategoryService;
+    @Autowired
+    private NewsTypeCategoryMapper newsTypeCategoryMapper;
+
+    @GetMapping("/newsTypeCategories")
+    public Result getNewsTypeCategories(@RequestParam String newsTypeName) {
+        List<NewsTypeCategoryDTO> newsTypeCategories = newsTypeCategoryMapper.getNewsTypeCategories(newsTypeName);
+        return Result.success(newsTypeCategories);
+    }
 
     // 新增或者更新
     @PostMapping

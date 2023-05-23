@@ -87,7 +87,7 @@ export default {
         newsCategoryId: 13,
         size: 6
       }
-    }
+    },
       // getNewsList(data)
       //   .then(res => {
       //     console.log(res)
@@ -117,15 +117,15 @@ export default {
         }
       })
     },*/
-/*    //去到更多新闻列表页
+    //去到更多新闻列表页
     goMore(val) {
       this.$router.push({
-        path: '/home/moreMessage',
+        path: '/userHome/moreMessage',
         query: {
           type: val
         }
       })
-    }*/
+    }
   }
 }
 </script>

@@ -4,25 +4,174 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c5cfcbe-dfb1-4b71-b867-a885c022e782" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/EchartsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/myQuillEditor.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/InfoUs.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/newsType.vue" afterDir="false" />
+    <list default="true" id="5c5cfcbe-dfb1-4b71-b867-a885c022e782" name="更改" comment="对新闻模块进行了修改，并增加了Echarts">
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/config/ModelMapperConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsPaging.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsQueryListDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsTypeCategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/NewsTypeCategoryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/vo/news/PagingQueryListByNewsCategoryIdVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/News.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/moreMessage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/test.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/myNews.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_5_8_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_2_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_73.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_core_4_4_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_dysmsapi_2_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_auth0_java_jwt_3_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_generator_3_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_06.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysql_mysql_connector_j_8_0_32.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_4_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_SparseBitSet_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_core_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_schema_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spi_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spring_web_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger2_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_common_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_annotations_1_5_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_models_1_5_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_12_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_12_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_2_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_71.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_71.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_71.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_velocity_velocity_engine_core_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_22_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ini4j_ini4j_0_5_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jacoco_org_jacoco_agent_runtime_0_8_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_21_0_GA.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_1_0_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_4_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_4_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_2_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_2_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reflections_reflections_0_9_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_7_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_metadata_1_2_0_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/config/InterceptorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/config/InterceptorConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/AuthorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsCategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/GirlFriend.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/NewsCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/NewsCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/test/java/team/tunan/testMD5.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/test/java/team/tunan/testMD5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Author.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/AuthorMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/NewsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/NewsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/IAuthorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/AuthorServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/NewsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/NewsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/resources/mapper/AuthorMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/resources/mapper/NewsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/resources/mapper/NewsMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/Aside.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/Aside.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/Header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Menu.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/News.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/News.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/User.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/User.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/addNews.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/addNews.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/notice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/notice.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Info.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Info.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/work.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/work.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/person.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/person.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,18 +181,24 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="JavaScript File" />
         <option value="Class" />
+        <option value="Interface" />
         <option value="Vue Single File Component" />
+        <option value="Vue Options API Component" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/pom.xml" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/FileController.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsController.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UserController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/NewsTypeCategoryMapper.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsService.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/UserServiceImpl.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/resources/application.yml" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/components/Aside.vue" root0="SKIP_INSPECTION" />
@@ -73,12 +228,16 @@
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Info.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Introduce.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/MapView.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/News.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Services.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Star.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/index.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/moreMessage.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/school.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/work.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/myNews.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/person.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/README.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -89,6 +248,9 @@
         <option name="userSettingsFile" value="D:\apache-maven-3.6.1-bin\apache-maven-3.6.1\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2Psq0fLwnuMcYQS7NhIjztmOHoj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -108,7 +270,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/basic_java_code/News-release-system/News-release-system/news_system_web/src/components&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/basic_java_code/News-release-system/News-release-system/news_system_web/src/views/front/page&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -118,16 +281,21 @@
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;7d60da6f098913e1d79bb702cc2857ae&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\IntelliJ IDEA 2022.3.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Options API Component&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\components" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\views\front\page" />
+      <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\components" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\assets\front" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\views\front" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\assets\css" />
@@ -138,8 +306,13 @@
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system\src\main\resources\mapper" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="team.tunan.dto" />
+      <recent name="team.tunan.config" />
+      <recent name="team.tunan.vo.news" />
+    </key>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="Spring Boot.NewsSystemApplication">
     <configuration name="CodeGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.tunan.utils.CodeGenerator" />
       <module name="news_system" />
@@ -214,8 +387,30 @@
       <workItem from="1684579112446" duration="6881000" />
       <workItem from="1684590715587" duration="5000" />
       <workItem from="1684632736157" duration="1646000" />
-      <workItem from="1684649132166" duration="23346000" />
+      <workItem from="1684649132166" duration="23933000" />
+      <workItem from="1684681669319" duration="474000" />
+      <workItem from="1684682173400" duration="2168000" />
+      <workItem from="1684713992087" duration="10768000" />
+      <workItem from="1684727760372" duration="380000" />
+      <workItem from="1684738189129" duration="186000" />
+      <workItem from="1684738511876" duration="7866000" />
+      <workItem from="1684764065457" duration="947000" />
+      <workItem from="1684765024418" duration="6000" />
+      <workItem from="1684765039306" duration="708000" />
+      <workItem from="1684801386922" duration="169000" />
+      <workItem from="1684802246495" duration="8355000" />
+      <workItem from="1684818780392" duration="8019000" />
+      <workItem from="1684828213547" duration="1622000" />
+      <workItem from="1684830894024" duration="2110000" />
     </task>
+    <task id="LOCAL-00001" summary="对新闻模块进行了修改，并增加了Echarts">
+      <created>1684681258718</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684681258718</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,5 +431,11 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+    <MESSAGE value="对新闻模块进行了修改，并增加了Echarts" />
+    <option name="LAST_COMMIT_MESSAGE" value="对新闻模块进行了修改，并增加了Echarts" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -1,13 +1,18 @@
 import request from "@/utils/request";
 
 
-/**
- * 获取新闻查看量
- * @returns {*}
- */
-export const getViews = () => {
+// 获取新闻列表
+export const getNewsList = data => {
+    return request({
+        method: 'POST',
+        url: '/news/list',
+        params: data
+    })
+}
+
+export const getnew = data => {
     return request({
         method: 'GET',
-        url: '/news/getViews'
+        url: `/news/main/${data}`
     })
 }

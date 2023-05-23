@@ -5,8 +5,8 @@
                 v-model="title"></el-input>
       <el-input style="width: 200px;" placeholder="类型" suffix-icon="el-icon-document" class="ml-20"
                 v-model="type"></el-input>
-      <el-input style="width: 200px;" placeholder="审核状态" suffix-icon="el-icon-user
-" class="ml-20" v-model="isAudit">
+      <el-input style="width: 200px;" placeholder="状态" suffix-icon="el-icon-user
+" class="ml-20" v-model="status">
       </el-input>
       <el-button class="ml-20" type="primary" @click="load">搜索</el-button>
       <el-button class="ml-20" type="warning" @click="reset">重置</el-button>
@@ -37,26 +37,13 @@
       <el-table-column prop="id" label="编号"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column prop="type" label="类型"></el-table-column>
-      <el-table-column prop="userId" label="发布人id"></el-table-column>
-      <el-table-column prop="isAudit" label="审核状态">
+      <el-table-column prop="staus" label="状态">
         <template slot-scope="scope">
           <p>启用：
             <el-switch
                 :active-value="1"
                 :inactive-value="0"
-                v-model="scope.row.isAudit"
-                @change="">
-            </el-switch>
-          </p>
-        </template>
-      </el-table-column>
-      <el-table-column prop="top" label="是否热门">
-        <template slot-scope="scope">
-          <p>热门：
-            <el-switch
-                :active-value="1"
-                :inactive-value="0"
-                v-model="scope.row.top"
+                v-model="scope.row.status"
                 @change="">
             </el-switch>
           </p>
@@ -72,7 +59,7 @@
               icon="el-icon-info"
               iconColor="red"
               title="您确定删除吗？"
-              @confirm="del(scope.row.id)">
+              @confirm="del(scope.row.nid)">
             <el-button type="danger" slot="reference">删除<i class="el-icon-delete"></i></el-button>
           </el-popconfirm>
         </temple>
@@ -111,20 +98,19 @@ import axios from "axios";
 //import {Row} from "element-ui";
 
 export default {
-  name: "News",
+  name: "myNews",
   data() {
     return {
       tableData: [],
       total: 0,
       pageNum: 1,
-      pageSize: 8,
+      pageSize: 10,
       id: "",
       title: "",
       content: "",
       type: "",
       top: "",
-      userId: "",
-      isAudit: "",
+      status: "",
       dialogFormVisible: false,
       form: {}
     }
@@ -134,13 +120,15 @@ export default {
   },
   methods: {
     load() {
-      this.request.get("/news/page", {
+      let userId = localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")).userId : ""
+      this.request.get("/news/pageByUserId", {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
           title: this.title,
           type: this.type,
-          isAudit: this.isAudit
+          status: this.status,
+          userId: userId
         }
       }).then(res => {
         //console.log(res)
@@ -195,16 +183,10 @@ export default {
         }
       })
     },
-    // 选中项发生变化时会触发该事件
-    handleSelectionChange(val) {
-      this.multipleSelection = val
-    },
-    // 每页显示条数改变时会触发该事件
     handleSizeChange(pageSize) {
       this.pageSize = pageSize
       this.load()
     },
-    // 当前页发生改变时会触发该事件
     handleCurrentChange(pageNum) {
       this.pageNum = pageNum
       this.load()

@@ -48,7 +48,7 @@ const toolbarOptions = [
   [{ list: 'ordered' }, { list: 'bullet' }], // 有序、无序列表
   [{ script: 'sub' }, { script: 'super' }], // 上标/下标
   [{ indent: '-1' }, { indent: '+1' }], // 缩进
-  // [{'direction': 'rtl'}], // 文本方向
+  [{'direction': 'rtl'}], // 文本方向
   [{ size: ['small', false, 'large', 'huge'] }], // 字体大小
   [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题
   [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色
@@ -116,7 +116,9 @@ export default {
       }],
       title: "",
       content: '',
+      quillUpdateImg: false,
       editorOption: {
+        theme: 'snow',
         placeholder: '请在这里输入...',
         modules: {
           toolbar: {
@@ -144,11 +146,12 @@ export default {
     onSubmit() {
       // 获取选中的最后一级子节点的值
       let value = this.value[this.value.length - 1];
+      let userId = localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")).userId : ""
       this.request.post("/news", {
         type: value,
         title: this.title,
         content: this.content,
-        userId: 1,
+        userId: userId,
       }).then((res) => {
         if (res.code == "200") {
           this.$message({

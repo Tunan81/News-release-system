@@ -26,8 +26,8 @@ public class News implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("新闻")
-    @TableId(value = "nid", type = IdType.AUTO)
-    private Integer nid;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @ApiModelProperty("标题")
     private String title;
@@ -51,12 +51,14 @@ public class News implements Serializable {
     private Integer top;
 
     @ApiModelProperty("游览量")
-    private Integer views;
+    private Integer hits;
 
     @ApiModelProperty("点赞量")
     private Integer likes;
 
     @ApiModelProperty("封面图片")
     private String coverImage;
+
+    private Integer isAudit;
 
 }

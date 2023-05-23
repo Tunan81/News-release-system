@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "Person",
+  name: "person",
   data() {
     return {
       form: {},

@@ -1,7 +1,7 @@
 package team.tunan.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import team.tunan.controller.dto.UserDTO;
+import team.tunan.dto.UserDTO;
 import team.tunan.entity.User;
 
 /**

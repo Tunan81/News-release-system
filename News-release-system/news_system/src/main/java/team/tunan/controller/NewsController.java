@@ -2,16 +2,19 @@ package team.tunan.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import team.tunan.common.Result;
 
+import team.tunan.dto.NewsQueryDTO;
 import team.tunan.service.INewsService;
 import team.tunan.entity.News;
 
 import org.springframework.web.bind.annotation.RestController;
+import team.tunan.vo.PagingQueryListByNewsCategoryIdVO;
 
 /**
  * <p>
@@ -35,6 +38,11 @@ public class NewsController {
         return Result.success();
     }
 
+    /**
+     * 新增
+     * @param news 新闻实体
+     * @return
+     */
     @PostMapping("/addNews")
     public Result addNews(@RequestBody News news) {
         newsService.saveOrUpdate(news);
@@ -95,20 +103,69 @@ public class NewsController {
                            @RequestParam Integer pageSize,
                            @RequestParam(defaultValue = "") String title,
                            @RequestParam(defaultValue = "") String type,
-                           @RequestParam(defaultValue = "") String status) {
+                           @RequestParam(defaultValue = "") String isAudit) {
         QueryWrapper<News> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("nid");
+        queryWrapper.orderByDesc("id");
         if (title != null && !"".equals(title)) {
             queryWrapper.like("title", title);
         }
         if (type != null && !"".equals(type)) {
             queryWrapper.eq("type", type);
         }
-        if (status != null && !"".equals(status)) {
-            queryWrapper.eq("status", status);
+        if (isAudit != null && !"".equals(isAudit)) {
+            queryWrapper.eq("status", isAudit);
         }
         return Result.success(newsService.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
+    /**
+     * 分页查询 通过用户id
+     * @param pageNum 页码
+     * @param pageSize 每页条数
+     * @param title 标题
+     * @param type 类型
+     * @param status 状态
+     * @return
+     */
+    @GetMapping("/pageByUserId")
+    public Result findPageByUserId(@RequestParam Integer pageNum,
+                           @RequestParam Integer pageSize,
+                           @RequestParam(defaultValue = "") String title,
+                           @RequestParam(defaultValue = "") String type,
+                           @RequestParam(defaultValue = "") String isAudit,
+                           @RequestParam(defaultValue = "") Integer userId) {
+        QueryWrapper<News> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        if (title != null && !"".equals(title)) {
+            queryWrapper.like("title", title);
+        }
+        if (type != null && !"".equals(type)) {
+            queryWrapper.eq("type", type);
+        }
+        if (isAudit != null && !"".equals(isAudit)) {
+            queryWrapper.eq("status", isAudit);
+        }
+        if (userId != null && !"".equals(userId)) {
+            queryWrapper.eq("user_id", userId);
+        }
+        return Result.success(newsService.page(new Page<>(pageNum, pageSize), queryWrapper));
+    }
+    @ApiOperation(value = "分页查询指定小标题下的新闻列表，可指定当前页和每页条数")
+    @PostMapping("/list")
+    public Result pagingQueryListByNewsCategoryId(PagingQueryListByNewsCategoryIdVO vo) {
+        return Result.success(newsService.getNewsListByNewsCategoryId(vo.getNewsCategoryId(), vo.getCurrent(), vo.getSize()));
 
+    }
+
+    /**
+     *  根据id获取新闻主题
+     * @param id 新闻主题id
+     * @return 新闻主题
+     */
+    @ApiOperation("获取新闻主题根据id")
+    @GetMapping("/main/{id}")
+    public Result queryNewsById(@PathVariable("id") Integer id) {
+        NewsQueryDTO news = newsService.getNewsById(id);
+        return Result.success(news);
+    }
 }
 

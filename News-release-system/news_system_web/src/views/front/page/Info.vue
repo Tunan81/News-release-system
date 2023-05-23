@@ -57,16 +57,6 @@ export default {
         name: '夏海珂',
         phone: '13161316723',
         email: '2636340500@qq.com'
-      },{
-        duty: '捣乱',
-        name: '杜艺',
-        phone: '110',
-        email: '2856946181@qq.com'
-      },{
-        duty: '捣乱',
-        name: '沈琪闲',
-        phone: '120',
-        email: '1754165772@qq.com'
       }
     ]
   },

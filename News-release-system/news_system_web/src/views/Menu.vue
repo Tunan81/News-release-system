@@ -59,19 +59,6 @@
       </el-table-column>
     </el-table>
 
-    <!--       翻页与页码部分         -->
-    <div style="padding: 10px 0">
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="pageNum"
-          :page-sizes="[2, 5, 10, 20]"
-          :page-size="pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-      </el-pagination>
-    </div>
-
     <el-dialog title="菜单信息" :visible.sync="dialogFormVisible" width="30%">
       <el-form label-width="80px" size="small">
         <el-form-item label="名称">
@@ -110,8 +97,6 @@ export default {
     return {
       tableData: [],
       total: 0,
-      pageNum: 1,
-      pageSize: 10,
       name: "",
       form: {},
       dialogFormVisible: false,
@@ -134,12 +119,6 @@ export default {
         console.log(res)
         this.tableData = res.data
       })
-/*      this.request.post("/menu/page", {
-        pageNum: this.pageNum,
-        pageSize: this.pageSize
-      }).then(res => {
-        this.total = res.data.total
-      })*/
     },
     save() {
       this.request.post("/menu", this.form).then(res => {
@@ -178,7 +157,6 @@ export default {
       })
     },
     handleSelectionChange(val) {
-      console.log(val)
       this.multipleSelection = val
     },
     delBatch() {
@@ -198,20 +176,13 @@ export default {
     },
     // 动态分页请求
     handleSizeChange(pageSize) {
-      console.log(pageSize)
+      //console.log(pageSize)
       this.pageSize = pageSize
       this.load()
     },
     handleCurrentChange(pageNum) {
-      console.log(pageNum)
+      //console.log(pageNum)
       this.pageNum = pageNum
-      this.load()
-    },
-    exp() {
-      window.open("http://localhost:9090/menu/export")
-    },
-    handleExcelImportSuccess() {
-      this.$message.success("文件导入成功!")
       this.load()
     }
   }
