@@ -117,6 +117,17 @@
             <artifactId>modelmapper</artifactId>
             <version>2.3.0</version>
         </dependency>
+        <!--COS-->
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.6.30</version>
+        </dependency>
+        <!-- Log4j2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -3,8 +3,11 @@ package team.tunan.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import team.tunan.common.Result;
@@ -31,9 +34,14 @@ public class NewsController {
     @Resource
     private INewsService newsService;
 
+    @Autowired
+    private ModelMapper  modelMapper;
+
     // 新增或者更新
     @PostMapping
     public Result save(@RequestBody News news) {
+        news.setHits(0); // 点击量默认为0
+        news.setReleaseTime(new Date()); // 发布时间
         newsService.saveOrUpdate(news);
         return Result.success();
     }
@@ -43,7 +51,7 @@ public class NewsController {
      * @param news 新闻实体
      * @return
      */
-    @PostMapping("/addNews")
+    @PostMapping("/add")
     public Result addNews(@RequestBody News news) {
         newsService.saveOrUpdate(news);
         return Result.success();
@@ -149,6 +157,12 @@ public class NewsController {
         }
         return Result.success(newsService.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
+
+    /**
+     *  分页查询指定小标题下的新闻列表，可指定当前页和每页条数
+     * @param vo 小标题id，当前页，每页条数
+     * @return 新闻列表
+     */
     @ApiOperation(value = "分页查询指定小标题下的新闻列表，可指定当前页和每页条数")
     @PostMapping("/list")
     public Result pagingQueryListByNewsCategoryId(PagingQueryListByNewsCategoryIdVO vo) {

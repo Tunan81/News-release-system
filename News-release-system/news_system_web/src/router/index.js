@@ -39,11 +39,11 @@ const routes = [
 
         ]
     },
-    {
+/*    {
         path: '/userHome',
         name: 'UserHome',
         component: () => import('../views/front/UserHome.vue')
-    },
+    },*/
     {
         path: '/MapView',
         name: 'MapView',
@@ -83,11 +83,11 @@ const routes = [
       name: 'infoUs',
         component: () => import('../views/front/InfoUs.vue')
     },
-    {
+/*    {
         path: '/test',
         name: 'test',
         component: () => import('../views/front/test.vue')
-    },
+    },*/
 
 ]
 

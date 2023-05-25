@@ -7,7 +7,7 @@
         <el-breadcrumb-item>{{ $route.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <el-dropdown style="width: 100px; cursor: pointer">
+    <el-dropdown style="width: 110px; cursor: pointer">
       <div style="display: inline-block">
         <img :src="loginUser.avatar" alt=""
              style="width: 30px; border-radius: 50%; position: relative; top: 10px; right: 10px;">

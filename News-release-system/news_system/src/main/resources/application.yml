@@ -1,15 +1,28 @@
 spring:
-  application:
-    name: sms-demo-server
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-    username: root
-    password: 261615
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
+    driver-class-name: com.mysql.cj.jdbc.Driver # 你的数据库驱动
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC # 你的数据库地址
+    username: root # 你的数据库用户名
+    password: 261615 # 你的数据库密码
+  servlet:
+    multipart:
+      max-file-size: 100MB # 单个文件最大
+      max-request-size: 100MB # 总上传大小
+
+application:
+  store:
+    cos:
+      domain-url: https://news-1313478973.cos.ap-chongqing.myqcloud.com # 你的cos域名
+      access-key: AKIDNvPxb4MROGC2mT1Uk3KzTp23rY5ShleK # 你的accessKey
+      access-key-secret: DNNF0eCQfOfv45vcBdrqgO2eM1iUJOez # 你的accessKeySecret
+      bucket: news-1313478973 # 你的bucket
+      endpoint: ap-chongqing # 你的地域
+    local:
+      domain-url: http://localhost:9090 # 你的本地域名
 
 server:
-  port: 9090
+  port: 9090 # 你的端口号
 
 mybatis-plus:
   configuration:

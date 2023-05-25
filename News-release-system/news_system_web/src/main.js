@@ -17,7 +17,6 @@ import {ImageDrop} from "quill-image-drop-module";
 Quill.register("modules/imageResize", ImageResize);
 Quill.register("modules/imageDrop", ImageDrop);
 
-require('./mock.js')
 
 Vue.use(VueQuillEditor)
 

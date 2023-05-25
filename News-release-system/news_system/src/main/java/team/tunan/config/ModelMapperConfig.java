@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author Tunan
  * @date 2023/5/23 10:47
+ * @description ModelMapper配置类
+ * @since version-1.0
  */
 @Configuration
 public class ModelMapperConfig {

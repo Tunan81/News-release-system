@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-//import { getMinTitle, getNewsList } from '../api/api'
+import {getNewsList} from "@/api/api";
+import {formatDate} from "@/utils/date";
 
 export default {
   name: 'notice',
@@ -33,90 +33,43 @@ export default {
     }
   },
   created() {
-    this.noticeList = [
-      {
-        title: "学校召开2023届本科生毕业典礼",
-        releaseTime: "2023-05-18"
-      },
-      {
-        title: "2023年春季学期期末考试安排公告",
-        releaseTime: "2023-05-16"
-      },
-      {
-        title: "学校荣获2019-2020年度优秀研究生导师奖",
-        releaseTime: "2023-05-15"
-      },
-      {
-        title: "我校教师代表赴德国参加国际会议",
-        releaseTime: "2023-05-12"
-      },
-      {
-        title: "学校举行首届“创意周”活动",
-        releaseTime: "2023-05-10"
-      },
-      {
-        title: "学校引进教授博士后工作站启动",
-        releaseTime: "2023-05-08"
-      },
-      {
-        title: "我校图书馆扩建工程竣工验收",
-        releaseTime: "2023-05-07"
-      },
-      {
-        title: "学校设立新的校区",
-        releaseTime: "2023-05-02"
-      },
-      {
-        title: "2023年五一假期放假通知",
-        releaseTime: "2023-04-28"
-      },
-      {
-        title: "学校与国内知名企业签订合作协议",
-        releaseTime: "2023-04-25"
-      }
-    ]
+    this.getnews()
   },
   mounted() {
-    this.getnews()
+    //this.getnews()
   },
   methods: {
     //获取新闻列表
     getnews() {
       const data = {
         current: 1,
-        newsCategoryId: 13,
-        size: 6
+        newsCategoryId: 1,
+        size: 7
       }
-    },
-      // getNewsList(data)
-      //   .then(res => {
-      //     console.log(res)
-      //     if (res.code == 200) {
-      //       this.noticeList = res.data.records
-      //     }
-      //   })
-      //   .catch(error => {
-      //     console.log(error)
-      //   })
-/*      axios.get("https://mockapi.eolinker.com/6cw39F8a4f8b1d77e98fa5cf3c3fd55dd5dffd07078a7e0/news")
+      getNewsList(data)
           .then(res => {
-            if (res.status == 200) {
-              this.noticeList = res.data.list
+            console.log(res)
+            if (res.code == 200) {
+              this.noticeList = res.data.records
+              //格式化时间
+              this.noticeList.forEach(item => {
+                let date = new Date(item.releaseTime)
+                item.releaseTime = formatDate(date, 'yyyy-MM-dd')
+              })
             }
           })
           .catch(error => {
             console.log(error)
           })
-    },*/
-/*    // 去到新闻展示页
+    },
     toNoticeMsg(id) {
       this.$router.push({
-        path: '/home/news',
+        path: '/userHome/news',
         query: {
           id: id
         }
       })
-    },*/
+    },
     //去到更多新闻列表页
     goMore(val) {
       this.$router.push({

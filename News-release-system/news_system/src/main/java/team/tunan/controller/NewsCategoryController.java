@@ -30,6 +30,7 @@ public class NewsCategoryController {
 
     @Resource
     private INewsCategoryService newsCategoryService;
+
     @Autowired
     private NewsTypeCategoryMapper newsTypeCategoryMapper;
 

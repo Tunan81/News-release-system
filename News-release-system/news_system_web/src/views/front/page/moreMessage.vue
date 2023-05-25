@@ -72,7 +72,8 @@
   </div>
 </template>
 <script>
-//import { getNewsList } from '../../api/api'
+import {getNewsList} from "@/api/api";
+import {formatDate} from "@/utils/date";
 
 export default {
   name: 'moreMessage',
@@ -118,15 +119,19 @@ export default {
     getnotice() {
       const data = {
         current: this.currentPagenotice,
-        newsCategoryId: 13,
+        newsCategoryId: 1,
         size: this.pageSize
       }
       getNewsList(data)
         .then(res => {
-          // console.log(res);
           if (res.code == 200) {
             this.noticeList = res.data.records
             this.totalnotice = res.data.total
+            //格式化时间
+            this.noticeList.forEach(item => {
+              let date = new Date(item.releaseTime)
+              item.releaseTime = formatDate(date, 'yyyy-MM-dd')
+            })
           }
         })
         .catch(error => {
@@ -136,15 +141,19 @@ export default {
     getwork() {
       const data = {
         current: this.currentPagework,
-        newsCategoryId: 14,
+        newsCategoryId: 2,
         size: this.pageSize
       }
       getNewsList(data)
         .then(res => {
-          // console.log(res);
           if (res.code == 200) {
             this.workList = res.data.records
             this.totalwork = Number(res.data.total)
+            //格式化时间
+            this.workList.forEach(item => {
+              let date = new Date(item.releaseTime)
+              item.releaseTime = formatDate(date, 'yyyy-MM-dd')
+            })
           }
         })
         .catch(error => {
@@ -154,15 +163,19 @@ export default {
     getschool() {
       const data = {
         current: this.currentPageschool,
-        newsCategoryId: 15,
+        newsCategoryId: 3,
         size: this.pageSize
       }
       getNewsList(data)
         .then(res => {
-          // console.log(res);
           if (res.code == 200) {
             this.schoolList = res.data.records
             this.totalschool = Number(res.data.total)
+            //格式化时间
+            this.schoolList.forEach(item => {
+              let date = new Date(item.releaseTime)
+              item.releaseTime = formatDate(date, 'yyyy-MM-dd')
+            })
           }
         })
         .catch(error => {
@@ -171,7 +184,7 @@ export default {
     },
     toNoticeMsg(id) {
       this.$router.push({
-        path: '/home/news',
+        path: '/userHome/news',
         query: {
           id: id
         }
@@ -180,7 +193,7 @@ export default {
     },
     toSchoolMsg(id) {
       this.$router.push({
-        path: '/home/news',
+        path: '/userHome/news',
         query: {
           id: id
         }
@@ -189,7 +202,7 @@ export default {
     },
     toWorkMsg(id) {
       this.$router.push({
-        path: '/home/news',
+        path: '/userHome/news',
         query: {
           id: id
         }
@@ -224,7 +237,6 @@ export default {
   height: 50px;
   overflow: hidden;
   line-height: 60px;
-  /* // background-color: rgb(179, 19, 19); */
   padding: 0 0 0 10px;
 }
 

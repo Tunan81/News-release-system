@@ -41,6 +41,8 @@
 <script>
 //import MyQuillEditor from "@/components/myQuillEditor.vue";
 // 工具栏配置
+import {forEach} from "core-js/stable/dom-collections";
+
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'], // 加粗 斜体 下划线 删除线
   ['blockquote', 'code-block'], // 引用  代码块
@@ -69,12 +71,15 @@ export default {
         value: '首页',
         label: '首页',
         children: [{
+          newsCategoryId: 1,
           value: '通知公告',
           label: '通知公告',
         }, {
+          newsCategoryId: 2,
           value: '工作动态',
           label: '工作动态',
         }, {
+          newsCategoryId: 3,
           value: '学院动态',
           label: '学院动态',
         }],
@@ -115,6 +120,11 @@ export default {
         label: '公共服务',
       }],
       title: "",
+      newsCategoryIdMap: {
+        通知公告: 1,
+        工作动态: 2,
+        学院动态: 3,
+      },
       content: '',
       quillUpdateImg: false,
       editorOption: {
@@ -146,12 +156,16 @@ export default {
     onSubmit() {
       // 获取选中的最后一级子节点的值
       let value = this.value[this.value.length - 1];
+      // 获取新闻分类id
+      let newsCategoryId = this.newsCategoryIdMap[value];
+      // 获取用户id
       let userId = localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")).userId : ""
       this.request.post("/news", {
         type: value,
         title: this.title,
         content: this.content,
         userId: userId,
+        newsCategoryId: newsCategoryId,
       }).then((res) => {
         if (res.code == "200") {
           this.$message({

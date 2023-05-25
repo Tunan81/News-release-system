@@ -2,13 +2,16 @@ package team.tunan.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -39,7 +42,7 @@ public class News implements Serializable {
     private String type;
 
     @ApiModelProperty("发布时间")
-    private LocalDateTime releaseTime;
+    private Date releaseTime;
 
     @ApiModelProperty("发布人")
     private Integer userId;
@@ -61,4 +64,6 @@ public class News implements Serializable {
 
     private Integer isAudit;
 
+    @ApiModelProperty("新闻类别")
+    private Integer newsCategoryId;
 }

@@ -8,7 +8,7 @@
       <ul>
         <li :key="index" v-for="(item, index) in workList" class="liPointer">
           <el-card style='margin: 1px; overflow: hidden ' >
-          <div @click="toWorkMsg(item.id)" class="">
+          <div @click="toWorkMsg(item.id)">
             {{ item.title }}
           </div>
           </el-card>
@@ -20,6 +20,7 @@
 <script>
 //import { getNewsList } from '../api/api'
 import {getNewsList} from "@/api/api";
+import {formatDate} from "@/utils/date";
 export default {
   name: 'work',
   data() {
@@ -29,13 +30,6 @@ export default {
   },
   created() {
     this.getnews()
-    //this.workList = []
-      /*{ id: 1, title: "重庆工程学院2023年本科生招生工作圆满结束" },
-      { id: 2, title: "重庆工程学院医学工程系获批硕士学位授权点" },
-      { id: 3, title: "重庆市教委来校验收临港校区环境卫生工作" },
-      { id: 4, title: "重庆工程学院2023年春季运动会圆满落幕" },
-      { id: 21, title: "研究生院召开2023年招生宣传工作部署会议" },
-    ]*/
   },
   methods: {
     //获取新闻列表

@@ -3,28 +3,6 @@
     <!-- 首页上半部分 -->
     <el-row type='flex' justify='space-between'>
       <div class='block marr10' style="padding:0px 20px 5px 0px;">
-<!--        <el-carousel height='400px' arrow='always' :interval='3000'>
-&lt;!&ndash;          <el-carousel-item v-for='(item, index) in imgList' :key='index'>
-            <div @click='gonew(item.id)' class='cursor' style='width:590px; height:450px'>
-              <img :src="item.picturePath" alt='' style='width:100%; height:90%' />
-            </div>
-          </el-carousel-item>&ndash;&gt;
-          <el-carousel-item>
-            <div class='cursor'>
-              <img src="~@/assets/lb_01.jpg" style='width:100%; height:90%'>
-            </div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div class='cursor'>
-              <img src="~@/assets/lb_02.jpg" style='width:100%; height:90%'>
-            </div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div class='cursor'>
-              <img src="~@/assets/lb_03.jpg" style='width:100%; height:90%'>
-            </div>
-          </el-carousel-item>
-        </el-carousel>-->
         <el-carousel height='410px' arrow='always' :interval='3000'>
           <el-carousel-item>
             <div class='cursor' style='width:100%; height:90%'>
@@ -46,21 +24,21 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-      <notice class='notice' />
+      <notice class='notice'/>
     </el-row>
     <!-- 首页下半部分 -->
     <el-row type='flex' class='row-bg' justify='space-between'>
-      <work class='work' />
-      <school class='school' />
-      <other class='other' />
+      <work class='work'/>
+      <school class='school'/>
+      <other class='other'/>
     </el-row>
 
     <!-- 定位fixed -->
     <div class='fixed1'>
-      <a @click="$router.push('Info')"><img src='~@/assets/front/phone.jpg' alt='' /></a>
+      <a @click="$router.push('Info')"><img src='~@/assets/front/phone.jpg' alt=''/></a>
     </div>
     <div class='fixed2'>
-      <a @click="$router.push('/MapView')"><img src='~@/assets/front/map.jpg' alt='' /></a>
+      <a @click="$router.push('/MapView')"><img src='~@/assets/front/map.jpg' alt=''/></a>
     </div>
   </div>
 </template>
@@ -73,7 +51,7 @@ import other from '../other.vue'
 //import { getNewsList } from '../../api/api'
 
 export default {
-  components:{notice ,work, school ,other},
+  components: {notice, work, school, other},
   name: 'index',
   data() {
     return {
@@ -84,26 +62,26 @@ export default {
     //this.getnews()
   },
   methods: {
-/*    getnews() {
-      const data = {
-        current: 1,
-        newsCategoryId: 16,
-        size: 3
-      }
-      getNewsList(data)
-          .then(res => {
-            console.log(res)
-            if (res.code == 200) {
-              this.imgList = res.data.records
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
-    },*/
-/*    gonew(id) {
-      this.$router.push({ path: '/home/news', query: { id: id } })
-    }*/
+    /*    getnews() {
+          const data = {
+            current: 1,
+            newsCategoryId: 16,
+            size: 3
+          }
+          getNewsList(data)
+              .then(res => {
+                console.log(res)
+                if (res.code == 200) {
+                  this.imgList = res.data.records
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
+        },*/
+    /*    gonew(id) {
+          this.$router.push({ path: '/home/news', query: { id: id } })
+        }*/
   }
 }
 </script>
@@ -111,12 +89,13 @@ export default {
 .block {
   width: 60%;
 }
+
 .title {
   position: absolute;
   bottom: 10px;
   left: 0;
   width: 100%;
-  padding: 10px;
+  padding: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 18px;

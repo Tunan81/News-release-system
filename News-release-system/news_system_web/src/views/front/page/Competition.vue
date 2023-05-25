@@ -131,7 +131,7 @@ export default {
     // 跳转到新闻展示页面
     show(item) {
       // console.log(item.id);
-      this.$router.push({path: '/home/news', query: {id: item.id}})
+      this.$router.push({path: '/userHome/news', query: {id: item.id}})
     }
   }
 }

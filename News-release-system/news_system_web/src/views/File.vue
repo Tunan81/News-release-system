@@ -6,10 +6,6 @@
       <el-button type="warning" @click="reset">重置</el-button>
     </div>
     <div style="margin: 10px 0">
-      <el-upload :action="'http://localhost:9090/file/upload'" :show-file-list="false"
-                 :on-success="handleFileUploadSuccess" style="display: inline-block">
-        <el-button type="primary" class="ml-5">上传文件 <i class="el-icon-top"></i></el-button>
-      </el-upload>
       <el-popconfirm
           class="ml-5"
           confirm-button-text='确定'
@@ -79,6 +75,7 @@
 </template>
 
 <script>
+
 export default {
   name: "File",
   data() {
@@ -103,10 +100,8 @@ export default {
           name: this.name,
         }
       }).then(res => {
-
         this.tableData = res.data.records
         this.total = res.data.total
-
       })
     },
     changeEnable(row) {
@@ -131,7 +126,7 @@ export default {
       this.multipleSelection = val
     },
     delBatch() {
-      let ids = this.multipleSelection.map(v => v.id)  // [{}, {}, {}] => [1,2,3]
+      let ids = this.multipleSelection.map(v => v.id)
       this.request.post("/file/del/batch", ids).then(res => {
         if (res.code === '200') {
           this.$message.success("批量删除成功")
@@ -153,11 +148,6 @@ export default {
     handleCurrentChange(pageNum) {
       console.log(pageNum)
       this.pageNum = pageNum
-      this.load()
-    },
-    handleFileUploadSuccess(res) {
-      console.log(res)
-      this.$message.success("上传成功")
       this.load()
     },
     download(url) {

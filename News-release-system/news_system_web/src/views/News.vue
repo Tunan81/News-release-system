@@ -167,9 +167,9 @@ export default {
       this.form = row
       this.dialogFormVisible = true
     },
-    del(nid) {
-      console.log(nid)
-      this.request.delete("/news/" + nid).then(res => {
+    del(id) {
+      console.log(id)
+      this.request.delete("/news/" + id).then(res => {
         if (res) {
           this.$message.success("删除成功")
           this.load()
@@ -185,7 +185,7 @@ export default {
       this.load()
     },
     delBatch() {
-      let ids = this.multipleSelection.map(v => v.nid)
+      let ids = this.multipleSelection.map(v => v.id)
       this.request.post("/news/del/batch/", ids).then(res => {
         if (res) {
           this.$message.success("批量删除成功")

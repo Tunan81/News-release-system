@@ -26,7 +26,7 @@ import java.util.List;
  * 文件上传相关接口
  */
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/files")
 public class FileController {
 
     @Value("${files.upload.path}")
@@ -39,7 +39,7 @@ public class FileController {
     /**
      * 文件上传接口
      * @param file 前端传递过来的文件
-     * @return
+     * @return 返回文件的访问路径
      * @throws IOException
      */
     @PostMapping("/upload")

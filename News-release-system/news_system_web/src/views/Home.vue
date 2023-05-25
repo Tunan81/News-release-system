@@ -34,17 +34,16 @@
         </el-card>
       </el-col>
     </el-row>
+
   </div>
 </template>
 
 <script>
 
-
 export default {
   name: "Home",
   data() {
-    return {}
-  },
+  }
 }
 
 </script>
