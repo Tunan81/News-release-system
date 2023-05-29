@@ -17,7 +17,6 @@
       >
         <el-button type="danger" slot="reference">批量删除 <i class="el-icon-remove-outline"></i></el-button>
       </el-popconfirm>
-
     </div>
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"
               @selection-change="handleSelectionChange">
@@ -36,10 +35,9 @@
           <el-button type="primary" @click="download(scope.row.url)">下载</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="启用">
+      <el-table-column label="复制链接">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.enable" active-color="#13ce66" inactive-color="#ccc"
-                     @change="changeEnable(scope.row)"></el-switch>
+          <el-button type="primary" @click="copy(scope.row.url)">复制链接</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="200" align="center">
@@ -70,7 +68,6 @@
           :total="total">
       </el-pagination>
     </div>
-
   </div>
 </template>
 
@@ -154,8 +151,22 @@ export default {
       window.open(url)
     },
     preview(url) {
-      window.open('https://file.keking.cn/onlinePreview?url=' + encodeURIComponent(window.btoa((url))))
+      window.open('http://127.0.0.1:8012/onlinePreview?url=' + encodeURIComponent(window.btoa((url))))
+      /*window.open('http://127.0.0.1:8012/onlinePreview?url='+encodeURIComponent(base64Encode(url)));*/
     },
+    copy(url) {
+      const input = document.createElement('input')
+      input.setAttribute('readonly', 'readonly')
+      input.setAttribute('value', url)
+      document.body.appendChild(input)
+      input.select()
+      if (document.execCommand('copy')) {
+        document.execCommand('copy')
+        this.$message.success('复制成功')
+      } else {
+        this.$message.error('复制失败')
+      }
+    }
   }
 }
 </script>

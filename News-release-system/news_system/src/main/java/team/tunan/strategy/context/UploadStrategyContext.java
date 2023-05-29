@@ -19,6 +19,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UploadStrategyContext {
 
+    // 上传策略集合 key:上传策略名称 value:上传策略实现类 通过构造方法注入
     private final Map<String, UploadStrategy> uploadStrategyMap;
 
     /**
@@ -31,11 +32,6 @@ public class UploadStrategyContext {
     public String executeUploadStrategy(MultipartFile file, final String filePath, String uploadServiceName) {
         // 执行特点的上传策略
         return uploadStrategyMap.get(uploadServiceName).uploadFile(file, filePath);
-    }
-
-    // 执行删除策略
-    public void executeDeleteStrategy(String url, String uploadServiceName) {
-       return;
     }
 
 }

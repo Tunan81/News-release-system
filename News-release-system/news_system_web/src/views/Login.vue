@@ -7,17 +7,14 @@
       <el-form-item prop="username">
         <el-input type="text" v-model="loginUser.username" placeholder="亲，请输入用户名">
         </el-input>
+        <div v-if="isDuplicate" style="color: red; font-size: 12px;">
+          用户名已存在
+        </div>
       </el-form-item>
       <el-form-item prop="password">
         <el-input type="password" v-model="loginUser.password" placeholder="亲，请输入密码">
         </el-input>
       </el-form-item>
-<!--      <el-form-item prop="role">
-        <el-select v-model="loginUser.role" placeholder="请选择角色" style="width: 280px">
-          <el-option label="一般用户" value="一般用户"></el-option>
-          <el-option label="管理员" value="管理员"></el-option>
-        </el-select>
-      </el-form-item>-->
       <el-form-item prop="code">
         <el-row :span="24">
           <el-col :span="12">
@@ -32,7 +29,6 @@
         </el-row>
       </el-form-item>
       <a href="./register" style="margin-left:0px;text-decoration: none;color: #4f84d4">立即注册</a>
-<!--      <el-checkbox v-model="checked" class="loginRemember">记住我</el-checkbox>-->
       <a href="./RePwd" style="margin-left:145px;text-decoration: none;color: #4f84d4">找回密码</a>
       <br>
       <br>
@@ -49,7 +45,6 @@
 </template>
 <script>
 import {setRoutes} from "@/router";
-import {Axios as request} from "axios";
 import SIdentify from "@/components/SIdentify.vue";
 import md5 from "js-md5";
 
@@ -61,8 +56,8 @@ export default {
       captchaUrl: "",
       loginUser: {
         userId: "",
-        username: "Alice",
-        password: "123456",
+        username: "",
+        password: "",
         avatar: '',
         code: ''
       },
@@ -85,8 +80,8 @@ export default {
         }],
         code: [{required: true, message: "请输入验证码", trigger: "blur"}],
       },
+      isDuplicate: false // 初始化为未重复
     }
-
   },
   mounted() {
     // 初始化验证码
@@ -114,6 +109,7 @@ export default {
         return
       }
       this.loginUser.password = md5(this.loginUser.password) //md5加密
+      // 发送Post请求到服务器验证用户名是否存在
       this.request.post("/user/login", this.loginUser).then(res => {
           if (res.code == "200") {
             //存储用户信息到游览器

@@ -18,5 +18,6 @@ public class Files {
     private String md5;
     private Boolean isDelete;
     private Boolean enable;
+    private String suffix;
 
 }

@@ -22,6 +22,7 @@ application:
       domain-url: http://localhost:9090 # 你的本地域名
 
 server:
+  ip: localhost # 你的ip
   port: 9090 # 你的端口号
 
 mybatis-plus:

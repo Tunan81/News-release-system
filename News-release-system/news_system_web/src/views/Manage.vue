@@ -10,7 +10,9 @@
       </el-header>
       <el-main>
         <!-- 表示当前页面的子路由会在rounter-view里面展示-->
+        <transition name="fade-transform" mode="out-in">
         <router-view @refreshuUser="getUser"/>
+        </transition>
       </el-main>
     </el-container>
   </el-container>
@@ -30,7 +32,6 @@ export default {
       isCollapse: false,
       sideWidth: 200,
       logoTextShow: true,
-      /*pathName: String*/
       loginUser: {}
     }
   },
@@ -65,4 +66,18 @@ export default {
   }
 }
 </script>
+<style>
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>
 

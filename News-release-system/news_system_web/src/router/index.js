@@ -5,22 +5,6 @@ import store from "@/store";
 Vue.use(VueRouter)
 
 const routes = [
-    /*        {
-                path: '/',
-                name: 'Manage',
-                component: () => import('../views/Manage.vue'),
-                redirect: "/home",
-                children: [
-                    {path: 'home', name: '', component: () => import('../views/Home.vue')},
-                    {path: 'user', name: '用户管理', component: () => import('../views/User.vue')},
-                    {path: 'news', name: '新闻管理', component: () => import('../views/News.vue')},
-                    {path: 'addNews', name: '发布新闻', component: () => import('../views/addNews.vue')},
-                    {path: 'person', name: '个人中心', component: () => import('../views/person.vue')},
-                    {path: 'file', name: '文件管理', component: () => import('../views/File.vue')},
-                    {path: 'role', name: '角色管理', component: () => import('../views/Role.vue')},
-                    {path: 'menu', name: '菜单管理', component: () => import('../views/Menu.vue')},
-                ]
-            },*/
     {
         path: '/userHome',
         name: 'userHome',
@@ -36,14 +20,8 @@ const routes = [
             {path: 'services', name: 'Services', component: () => import('../views/front/page/Services.vue')},
             {path: 'news', name: 'News', component: () => import('../views/front/page/News.vue'),},
             {path: 'moreMessage', name: 'moreMessage', component: () => import('../views/front/page/moreMessage.vue')},
-
         ]
     },
-/*    {
-        path: '/userHome',
-        name: 'UserHome',
-        component: () => import('../views/front/UserHome.vue')
-    },*/
     {
         path: '/MapView',
         name: 'MapView',
@@ -60,14 +38,9 @@ const routes = [
         component: () => import('../views/Register.vue')
     },
     {
-        path: '/404',
+        path: '*',
         name: '404',
-        component: () => import('../views/404.vue')
-    },
-    {
-        path: '/RetrievePassword',
-        name: 'RetrievePassword',
-        component: () => import('../views/RetrievePassword.vue')
+        component: () => import('../components/404.vue')
     },
     {
         path: '/RePwd',
@@ -79,16 +52,10 @@ const routes = [
         redirect:'/userHome/index'　　//默认显示
     },
     {
-      path: '/infoUs',
-      name: 'infoUs',
+        path: '/infoUs',
+        name: 'infoUs',
         component: () => import('../views/front/InfoUs.vue')
     },
-/*    {
-        path: '/test',
-        name: 'test',
-        component: () => import('../views/front/test.vue')
-    },*/
-
 ]
 
 const router = new VueRouter({
@@ -96,6 +63,14 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+// 提供一个重置路由的方法
+export const resetRouter = () => {
+    router.matcher = new VueRouter({
+        mode: 'history',
+        base: process.env.BASE_URL,
+        routes
+    })
+}
 
 export const setRoutes = () => {
     const storeMenus = localStorage.getItem("menus");
@@ -107,7 +82,7 @@ export const setRoutes = () => {
             component: () => import('../views/Manage.vue'),
             redirect: "/home",
             children: [
-                {path: 'person', name: '', component: () => import('../views/person.vue')},
+                {path: 'person', name: '', component: () => import('../views/Person.vue')},
             ]
         }
         const menus = JSON.parse(storeMenus)
@@ -144,15 +119,6 @@ export const setRoutes = () => {
 // 重置的时候就去设置路由
 setRoutes()
 
-// 提供一个重置路由的方法
-/*export const resetRouter = () => {
-    router.matcher = new VueRouter({
-        mode: 'history',
-        base: process.env.BASE_URL,
-        routes
-    })
-}*/
-
 router.beforeEach((to, from, next) => {
     localStorage.setItem("currentPathName", to.name)  // 设置当前的路由名称
     store.commit("setPath") // 设置当前的路由路径
@@ -160,12 +126,13 @@ router.beforeEach((to, from, next) => {
     if (!to.matched.length) {
         const storeMenus = localStorage.getItem("menus")
         if (storeMenus) {
-            next("/404")
+            next("*")
         } else {
             // 跳回登录页面
             next("/login")
         }
     }
+    if (to.path === "/userHome") { return next("/userHome/index")}
     // 其他的情况都放行
     next()
 })

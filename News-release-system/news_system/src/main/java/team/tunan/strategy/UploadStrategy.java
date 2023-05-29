@@ -12,5 +12,4 @@ public interface UploadStrategy {
 
     String uploadFile(MultipartFile file, final String filePath);
 
-    Boolean deleteFile(String url); //删除接口
 }

@@ -30,9 +30,9 @@ public abstract class AbstractUploadStrategyImpl implements UploadStrategy {
         try {
 
             //region 获取文件md5值 -> 获取文件后缀名 -> 生成相对路径
-            String fileMd5 = FileUtil.getMd5(file.getInputStream());
-            String extName = FileUtil.getExtName(file.getOriginalFilename());
-            String fileRelativePath = filePath + fileMd5 + extName;
+            String fileMd5 = FileUtil.getMd5(file.getInputStream()); // 文件md5值
+            String extName = FileUtil.getExtName(file.getOriginalFilename()); // 文件后缀名
+            String fileRelativePath = filePath + fileMd5 + extName; // 文件相对路径
             //endregion
 
             //region 初始化
@@ -49,6 +49,7 @@ public abstract class AbstractUploadStrategyImpl implements UploadStrategy {
                 files.setSize(file.getSize() / 1024); // 单位为kb
                 files.setMd5(fileMd5); // 文件md5值
                 files.setUrl(getPublicNetworkAccessUrl(fileRelativePath)); // 文件访问路径
+                files.setSuffix(extName); // 文件后缀名
                 fileMapper.insert(files);
             }
             //endregion
@@ -57,11 +58,6 @@ public abstract class AbstractUploadStrategyImpl implements UploadStrategy {
         } catch (IOException e) {
             throw new BaseException("文件上传失败");
         }
-    }
-
-    @Override
-    public Boolean deleteFile(String url) {
-        return true;
     }
 
     /**

@@ -94,8 +94,6 @@
 </template>
 
 <script>
-import axios from "axios";
-//import {Row} from "element-ui";
 
 export default {
   name: "myNews",

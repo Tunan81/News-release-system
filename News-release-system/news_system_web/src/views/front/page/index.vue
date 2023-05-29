@@ -5,19 +5,19 @@
       <div class='block marr10' style="padding:0px 20px 5px 0px;">
         <el-carousel height='410px' arrow='always' :interval='3000'>
           <el-carousel-item>
-            <div class='cursor' style='width:100%; height:90%'>
+            <div class='cursor' style='width:100%; height:100%'>
               <img src="~@/assets/lb_01.jpg" style='width:100%; height:100%'>
               <div class='title'>喜报！学校荣获“重庆五一劳动..</div>
             </div>
           </el-carousel-item>
           <el-carousel-item>
-            <div class='cursor' style='width:100%; height:90%'>
+            <div class='cursor' style='width:100%; height:100%'>
               <img src="~@/assets/lb_02.jpg" style='width:100%; height:100%'>
               <div class='title'>国科大第二届卓越工程师班举行..</div>
             </div>
           </el-carousel-item>
           <el-carousel-item>
-            <div class='cursor' style='width:100%; height:90%'>
+            <div class='cursor' style='width:100%; height:100%'>
               <img src="~@/assets/lb_03.jpg" style='width:100%; height:100%'>
               <div class='title'>学校召开学习贯彻习近平新时代..</div>
             </div>
@@ -92,10 +92,11 @@ export default {
 
 .title {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   left: 0;
   width: 100%;
-  padding: 0px;
+  height: 12%;
+  padding: 2px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 18px;

@@ -19,18 +19,24 @@ import team.tunan.config.interceptor.JwtInterceptor;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//
-//        registry.addInterceptor(jwtInterceptor())
-//                .addPathPatterns("/**")  // 拦截所有请求，通过判断token是否合法来决定是否需要登录
-//                .excludePathPatterns("/user/login", "/user/register", "/**/export", "/**/import", "/file/**",
-//                        "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/api/", "/api-docs", "/api-docs/**",
-//                        "/newsCategory/newsTypeCategories")
-//                .excludePathPatterns("/**/*.html", "/**/*.js", "/**/*.css", "/**/*.woff", "/**/*.ttf");  // 放行静态文件
-//
-//    }
+    /**
+     * 注册拦截器
+     * @param registry 注册器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwtInterceptor())
+                .addPathPatterns("/**")  // 拦截所有请求，通过判断token是否合法来决定是否需要登录
+                .excludePathPatterns("/userHome/**","/user/login", "/user/register", "/**/export", "/**/import", "/file/**",
+                        "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/api/", "/api-docs", "/api-docs/**")
+                .excludePathPatterns("/**/*.html", "/**/*.js", "/**/*.css", "/**/*.woff", "/**/*.ttf");  // 放行静态文件
 
+    }
+
+    /**
+     * 注册拦截器Bean
+     * @return JwtInterceptor
+     */
     @Bean
     public JwtInterceptor jwtInterceptor() {
         return new JwtInterceptor();

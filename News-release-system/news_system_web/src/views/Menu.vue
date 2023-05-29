@@ -8,7 +8,6 @@
       <el-button class="ml-5" type="primary" @click="load">搜索</el-button>
       <el-button type="warning" @click="reset">重置</el-button>
     </div>
-
     <!--      表格外部操作部分          -->
     <div style="margin: 10px 0">
       <el-button type="primary" @click="handleAdd">新增 <i class="el-icon-circle-plus-outline"></i></el-button>

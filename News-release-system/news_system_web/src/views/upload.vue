@@ -36,9 +36,9 @@ export default {
   methods: {
     // 上传前的回调
     beforeUpload(file) {
-      const isLt500K = file.size < 100
+      const isLt500K = file.size < 100 * 1024 * 1024
       if (!isLt500K) {
-        this.$message.error('上传文件大小不能超过 100000MB!')
+        this.$message.error('上传文件大小不能超过 100MB!')
       }
       // 只有选择了存储源，才能发送上传请求
       return this.selectedSource !== ''
@@ -55,7 +55,7 @@ export default {
         case 'cos':
           return '/file/upload/cos'
         default:
-          this.$message.error('请选择存储源!')
+          //this.$message.error('请选择存储源!')
           return ''
       }
     }

@@ -7,15 +7,21 @@
     </div>
     <hr/>
     <div v-html='content' class='ql-editor'></div>
+    <Backtop />
   </div>
+
 </template>
 
 <script>
 import {getnew} from "@/api/api";
 import {formatDate} from "@/utils/date";
+import Backtop from "@/components/backtop";
 
 export default {
   name: 'News',
+  components: {
+    Backtop
+  },
   data() {
     return {
       content: '',

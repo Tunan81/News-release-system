@@ -28,8 +28,6 @@
     </div>
 
     <el-table
-        v-loading="loading" element-loading-text="拼命加载中..." element-loading-spinner="el-icon-loading"
-        elment-loading-background="rgba(0, 0, 0, 0.8)"
         :data="tableData" border stripe :header-cell-class-name="'headerBg'"
         @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55px">
@@ -107,11 +105,8 @@
 </template>
 
 <script>
-import axios from "axios";
-//import {Row} from "element-ui";
-
 export default {
-  name: "News",
+  name: "news",
   data() {
     return {
       tableData: [],

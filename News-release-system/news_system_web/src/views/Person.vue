@@ -3,9 +3,10 @@
     <el-form label-width="80px" size="small">
       <el-upload
           class="avatar-uploader"
-          action="#"
+          action="http://localhost:9090/file/upload"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
       >
         <img v-if="form.avatar" :src="form.avatar" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -59,12 +60,11 @@ export default {
       })
     },
     handleAvatarSuccess(res) {
-      this.form.avatarUrl = res
+      this.form.avatar = res
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
       const isLt2M = file.size / 1024 / 1024 < 2;
-
       if (!isJPG) {
         this.$message.error('上传头像图片只能是 JPG 格式!');
       }
@@ -108,5 +108,6 @@ export default {
   width: 168px;
   height: 178px;
   display: block;
+  border-radius: 50px;
 }
 </style>
