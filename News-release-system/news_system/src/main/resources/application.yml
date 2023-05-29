@@ -14,8 +14,8 @@ application:
   store:
     cos:
       domain-url: https://news-1313478973.cos.ap-chongqing.myqcloud.com # 你的cos域名
-      access-key: AKIDNvPxb4MROGC2mT1Uk3KzTp23rY5ShleK # 你的accessKey
-      access-key-secret: DNNF0eCQfOfv45vcBdrqgO2eM1iUJOez # 你的accessKeySecret
+      access-key: 
+      access-key-secret: 
       bucket: news-1313478973 # 你的bucket
       endpoint: ap-chongqing # 你的地域
     local:
