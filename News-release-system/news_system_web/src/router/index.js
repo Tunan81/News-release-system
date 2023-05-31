@@ -56,6 +56,11 @@ const routes = [
         name: 'infoUs',
         component: () => import('../views/front/InfoUs.vue')
     },
+    {
+        path: '/test',
+        name: 'test',
+        component: () => import('../views/test.vue')
+    }
 ]
 
 const router = new VueRouter({

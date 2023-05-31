@@ -9,9 +9,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import team.tunan.common.Constants;
 import team.tunan.common.Result;
+import team.tunan.dto.LoginParam;
 import team.tunan.dto.UserDTO;
 import team.tunan.entity.User;
 import team.tunan.service.IUserService;
+import team.tunan.vo.R;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -147,4 +149,11 @@ public class UserController {
         queryWrapper.orderByDesc("user_id");
         return Result.success(userService.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
+
+    // 找回密码
+    @PostMapping("/findPassword")
+    public R findPassword(@RequestBody LoginParam loginParam) {
+        return userService.findPassword(loginParam);
+    }
+
 }

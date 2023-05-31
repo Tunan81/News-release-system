@@ -73,7 +73,7 @@ export default {
   width: 300px;
 }
 
-.el-upload__input{
+.el-upload__input {
   display: none;
 }
 

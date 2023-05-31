@@ -1,6 +1,7 @@
 package team.tunan.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -40,5 +41,10 @@ public class User implements Serializable {
     private Integer status;
     private String password;
     private String avatar;
+
+    private String email;
+
+    @TableField(exist = false)
+    private String code; //验证码
 
 }

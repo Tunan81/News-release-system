@@ -1,6 +1,6 @@
 <template>
   <div class="userLogin">
-    <el-form :rules="rules" ref="loginForm" :model="loginUser" class="loginContainer">
+    <el-form :rules="rules" ref="loginForm" :model="loginUser" class="loginContainer" @keyup.enter.native="UserLogin">
       <h3 class="loginTitle">
         欢迎登录
       </h3>
@@ -12,7 +12,7 @@
         </div>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input type="password" v-model="loginUser.password" placeholder="亲，请输入密码">
+        <el-input type="password" v-model="loginUser.password" placeholder="亲，请输入密码" show-password>
         </el-input>
       </el-form-item>
       <el-form-item prop="code">
@@ -23,37 +23,110 @@
           <el-col :span="12">
             <div class="login-code" @click="refreshCode">
               <!--验证码组件-->
-              <s-identify :identifyCode="identifyCode" style="margin-left: 20px"></s-identify>
+              <s-identify :identifyCode="identifyCode" style="margin-left: 35px"></s-identify>
             </div>
           </el-col>
         </el-row>
       </el-form-item>
-      <a href="./register" style="margin-left:0px;text-decoration: none;color: #4f84d4">立即注册</a>
-      <a href="./RePwd" style="margin-left:145px;text-decoration: none;color: #4f84d4">找回密码</a>
-      <br>
-      <br>
+      <div style="margin-bottom: 20px;margin-top: 0px">
+        <a href="./register" style="margin-left:0px;text-decoration: none;color: #4f84d4">立即注册</a>
+        <span @click="dialogFormVisible = true" style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>
+      </div>
       <el-button type="primary" style="width:100%;margin-bottom: 5px" @click="UserLogin">登录</el-button>
       <br>
       <div style="line-height: 22px;margin-top: 10px;color: #9b9b9b;">
         <span style="vertical-align:middle">第三方登录:</span>
-        <img src="../assets/icon/qq.png" width="25" height="25" style="vertical-align:middle;margin-left: 8px" title="QQ">
-        <img src="../assets/icon/weibo.png" width="25" height="25" style="vertical-align:middle;margin-left: 8px" title="微博">
-        <img src="../assets/icon/github.png" width="25" height="25" style="vertical-align:middle;margin-left: 8px" title="GitHub">
+        <img src="../assets/icon/qq.png" width="25" height="25" style="vertical-align:middle;margin-left: 8px"
+             title="QQ">
+        <img src="../assets/icon/weibo.png" width="25" height="25" style="vertical-align:middle;margin-left: 8px"
+             title="微博">
+        <img src="../assets/icon/github.png" width="25" height="25" style="vertical-align:middle;margin-left: 8px"
+             title="GitHub">
       </div>
     </el-form>
+    <!-- 找回密码 -->
+    <el-dialog @close="clearForm('findPasswordForm')" title="找回密码" :visible.sync="dialogFormVisible" width="40%"
+               append-to-body>
+      <el-form :model="findPasswordForm" ref="findPasswordForm" :rules="rules" label-width="70px">
+
+        <el-form-item label="邮箱" prop="email">
+          <el-input prefix-icon="el-icon-message" placeholder="请填写邮箱" maxlength="32"
+                    v-model="findPasswordForm.email"></el-input>
+        </el-form-item>
+
+        <el-form-item label="新密码" prop="password">
+          <el-input prefix-icon="el-icon-lock" placeholder="请填写 6-18 位密码" type="password" maxlength="18"
+                    v-model="findPasswordForm.password" show-password></el-input>
+        </el-form-item>
+
+        <el-form-item label="验证码" prop="code">
+          <el-input prefix-icon="el-icon-key" placeholder="请填写6位数字验证码" type="number" maxlength="6"
+                    v-model="findPasswordForm.code">
+            <el-button slot="append" @click="sendEmailCode()" :disabled="disabled">{{ msg }}</el-button>
+          </el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button type="danger" :loading="loading" @click="submitFindPassword('findPasswordForm')">提 交</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
 import {setRoutes} from "@/router";
 import SIdentify from "@/components/SIdentify.vue";
 import md5 from "js-md5";
+import user from "@/api/user";
+import common from "@/api/common";
 
 export default {
   components: {SIdentify},
   name: "userLogin",
   data() {
+    var email = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入邮箱'))
+      } else if (!/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/.test(value)) {
+        return callback(new Error('请输入正确的邮箱'))
+      } else {
+        callback()
+      }
+    };
+    var password = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入密码'))
+      } else if (/*!/(?=.*[a-zA-Z])[a-zA-Z0-9]{6,18}/.test(value)*/false) {
+        return callback(new Error("长度为6-18，只能是数字和字母且至少包含一个字母"))
+      } else {
+        callback()
+      }
+    };
+    var code = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入6位验证码'))
+      } else if (value.length !== 6) {
+        return callback(new Error('请输入6位验证码'))
+      } else {
+        callback()
+      }
+    }
     return {
-      captchaUrl: "",
+      // 倒计时
+      disabled: false,
+      msg: '点击获取验证码',
+      count: 60,
+      timer: 0,
+      // 按钮加载
+      loading: false,
+      // 找回密码
+      dialogFormVisible: false,
+      findPasswordForm: {
+        email: '',
+        password: '',
+        code: ''
+      },
+      // 登录
       loginUser: {
         userId: "",
         username: "",
@@ -70,15 +143,10 @@ export default {
           max: 14,
           message: '长度在 3 到 14 个字符',
           trigger: 'blur'
-        }
-        ],
-        password: [{required: true, message: "请输入密码", trigger: "blur"}, , {
-          min: 6,
-          max: 15,
-          message: '密码长度要大于6小于15',
-          trigger: 'blur'
         }],
         code: [{required: true, message: "请输入验证码", trigger: "blur"}],
+        email: [{validator: email, trigger: 'blur'}],
+        password: [{validator: password, trigger: 'blur'}],
       },
       isDuplicate: false // 初始化为未重复
     }
@@ -89,6 +157,10 @@ export default {
     this.makeCode(this.identifyCodes, 4)
   },
   methods: {
+    // 清空表单
+    clearForm(formName) {
+      this.$refs[formName].resetFields();
+    },
     refreshCode() {
       this.identifyCode = ''
       this.makeCode(this.identifyCodes, 4)
@@ -111,22 +183,77 @@ export default {
       this.loginUser.password = md5(this.loginUser.password) //md5加密
       // 发送Post请求到服务器验证用户名是否存在
       this.request.post("/user/login", this.loginUser).then(res => {
-          if (res.code == "200") {
-            //存储用户信息到游览器
-            localStorage.setItem("loginUser", JSON.stringify(res.data))
-            localStorage.setItem("menus", JSON.stringify(res.data.menus))
-            setRoutes()
-            this.$message.success("登陆成功！")
-            this.$router.push("/home")
-          } else if (res.code == "400") {
-            this.$message.warning(res.msg)
-          } else if (res.code == "401") {
-            this.$message.error(res.msg)
-          } else {
-            this.$message.error(res.msg)
-          }
+        if (res.code == "200") {
+          //存储用户信息到游览器
+          localStorage.setItem("loginUser", JSON.stringify(res.data))
+          localStorage.setItem("menus", JSON.stringify(res.data.menus))
+          setRoutes()
+          this.$message.success("登陆成功！")
+          this.$router.push("/home")
+        } else if (res.code == "400") {
+          this.$message.warning(res.msg)
+        } else if (res.code == "401") {
+          this.$message.error(res.msg)
+        } else {
+          this.$message.error(res.msg)
+        }
       })
-    }
+    },
+    // 修改密码
+    submitFindPassword(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.loading = true
+          // 请求
+          user.findPassword(this.findPasswordForm).then(_ => {
+            if (_) {
+              // 请求成功
+              this.$message({
+                message: '密码修改成功',
+                type: 'success'
+              })
+              this.dialogFormVisible = false
+            }
+          }).finally(_ => {
+            this.loading = false
+          })
+        }
+      })
+    },
+    // 获取验证码
+    sendEmailCode() {
+      this.$refs.findPasswordForm.validateField('email', result => {
+        if (!result) {
+          // 按钮倒计时
+          this.disabled = true;
+          this.msg = this.count-- + 's后重新获取';
+          this.timer = setInterval(() => {
+            this.msg = this.count-- + 's后重新获取';
+            if (this.count < 0) {
+              this.msg = '点击获取验证码';
+              this.count = 60;
+              this.disabled = false;
+              clearInterval(this.timer);
+            }
+          }, 1000);
+
+          // 发送验证码请求
+          common.getRequestCode(this.findPasswordForm.email).then(_ => {
+            common.getEmailCode(this.findPasswordForm.email, _.data.permissionCode).then(_ => {
+              if (_) {
+                // 通知邮箱发送
+                this.$notify({
+                  title: '邮箱验证码已发送',
+                  message: '验证码有效时长5分钟, 失效请重新发送',
+                  type: 'success',
+                  duration: 10 * 1000
+                })
+              }
+            })
+          })
+        }
+      });
+    },
   },
 }
 </script>
@@ -136,7 +263,7 @@ export default {
   border-radius: 15px;
   background-clip: padding-box;
   margin: 180px auto;
-  width: 350px;
+  width: 380px;
   padding: 15px 35px 15px 35px;
   background: #dfe0cd;
   border: 1px solid #99ccd1;
@@ -154,6 +281,15 @@ export default {
   margin: 0px 0px 15px 0px;
 }
 
+.login input::-webkit-outer-spin-button,
+.login input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.login input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .userLogin {
   background-image: url("@/assets/images/userLogin.png");
   width: 100%;
@@ -162,12 +298,18 @@ export default {
   background-size: 100% 100%;
 }
 
-login-bok {
-  width: 30%;
-  margin: 150px auto;
-  border: 1px solid #DCDFE6;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 30px #DCDFE6;
+.login input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+span {
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.el-dialog {
+  padding: 0px 50px;
 }
 </style>

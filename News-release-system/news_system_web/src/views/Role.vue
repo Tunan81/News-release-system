@@ -8,7 +8,6 @@
       <el-button class="ml-5" type="primary" @click="load">搜索</el-button>
       <el-button type="warning" @click="reset">重置</el-button>
     </div>
-
     <!--      表格外部操作部分          -->
     <div style="margin: 10px 0">
       <el-button type="primary" @click="handleAdd">新增 <i class="el-icon-circle-plus-outline"></i></el-button>
@@ -24,7 +23,6 @@
         <el-button type="danger" slot="reference">批量删除 <i class="el-icon-remove-outline"></i></el-button>
       </el-popconfirm>
     </div>
-
     <!--        表格内部操作部分        -->
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"
               @selection-change="handleSelectionChange">
@@ -52,7 +50,6 @@
         </template>
       </el-table-column>
     </el-table>
-
     <!--       翻页与页码部分         -->
     <div style="padding: 10px 0">
       <el-pagination
@@ -105,7 +102,6 @@
   </div>
 </template>
 
-<!--页面数据与动作Js代码-->
 <script>
 export default {
   name: "Role",

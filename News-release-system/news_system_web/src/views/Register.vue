@@ -7,13 +7,14 @@
       <el-form-item prop="username">
         <el-input type="text" v-model="userRegister.username" placeholder="请输入用户名">
         </el-input>
+        <div v-if="usernameExist" style="color: red;font-size: 10px">{{ usernameExist }}</div>
       </el-form-item>
       <el-form-item prop="password">
         <el-input type="password" v-model="userRegister.password" placeholder="请输入密码">
         </el-input>
       </el-form-item>
       <el-form-item prop="Password">
-        <el-input type="password" v-model="userRegister.regPwd" placeholder="请再次输入密码">
+        <el-input type="password" v-model="userRegister.regRePwd" placeholder="请再次输入密码">
         </el-input>
       </el-form-item>
       <el-form-item prop="code">
@@ -29,7 +30,7 @@
           </el-col>
         </el-row>
       </el-form-item>
-      <el-button type="primary" style="width:100%" @click="submitLogin">注册</el-button>
+      <el-button type="primary" style="width:100%" @click="submitForm">注册</el-button>
     </el-form>
   </div>
 </template>
@@ -67,6 +68,7 @@ export default {
         }],
         code: [{required: true, message: "请输入验证码", trigger: "blur"}],
       },
+      usernameExist: null, // 用户名是否已存在
     }
 
   },
@@ -94,23 +96,39 @@ export default {
         this.refreshCode()
         return
       }
-        this.request.post('/user/register', this.userRegister).then(res => {
+      this.request.post('/user/register', this.userRegister).then(res => {
+        if (res.code === "200") {
+          this.$message({
+            message: '注册成功',
+            type: 'success'
+          });
+          this.$router.push('/login')
+        } else {
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+        }
+      })
+    },
+    checkUsername() {
+      if (this.userRegister.username) {
+        this.request.post('/user/checkUsername', this.userRegister).then(res => {
           if (res.code === "200") {
-            this.$message({
-              message: '注册成功',
-              type: 'success'
-            });
-            this.$router.push('/login')
+            this.usernameExist = null
           } else {
-            this.$message({
-              message: res.msg,
-              type: 'error'
-            });
+            this.usernameExist = res.msg
           }
         })
-
+      }
     }
   },
+  watch: {
+    // 监听用户名输入框，并设置防抖
+    'userRegister.username': _.debounce(function () {
+      this.checkUsername()
+    }, 1500) //延迟1500毫秒
+  }
 }
 </script>
 

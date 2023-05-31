@@ -2,132 +2,149 @@
   <div class="rePwd">
     <el-form
         class="loginContainer"
-        :model="loginForm"
-        :rules="loginFormRules"
-        ref="loginFormRef"
+        :model="findPasswordForm"
+        :rules="rules"
+        ref="findPasswordForm"
         label-position="top"
     >
-      <el-form-item label="手机号" prop="phone">
-        <el-input v-model="loginForm.phone"></el-input>
+      <h3 class="loginTitle">找回密码</h3>
+      <el-form-item label="邮箱" prop="phone">
+        <el-input v-model="findPasswordForm.email"></el-input>
       </el-form-item>
       <el-form-item label="新密码" prop="password">
-        <el-input v-model="loginForm.password" type="password"></el-input>
+        <el-input v-model="findPasswordForm.password" type="password"></el-input>
       </el-form-item>
-      <el-form-item label="手机验证码" prop="verificationCode">
-        <el-input v-model="loginForm.verificationCode">
-          <template slot="append">
-            <el-button v-if="loginForm.showloginCode" type="primary" @click="getloginPhoneCode">获取验证码</el-button>
-            <div v-else>{{ loginForm.count }}</div>
-          </template>
+      <el-form-item label="验证码" prop="code">
+        <el-input prefix-icon="el-icon-key" placeholder="请填写6位数字验证码" type="number" maxlength="6"
+                  v-model="findPasswordForm.rcode">
+          <el-button slot="append" @click="sendEmailCode()" :disabled="disabled">{{ msg }}</el-button>
         </el-input>
       </el-form-item>
       <el-form-item class="btns">
-        <el-button type="primary" @click="login">提交</el-button>
+        <el-button type="danger" :loading="loading" @click="submitFindPassword('findPasswordForm')">提 交</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
+import user from "@/api/user";
+import common from "@/api/common";
+
 export default {
   name: "RePwd",
   data() {
-    // 验证手机号是否合法
-    var checkMobile = (rules, value, callback) => {
-      const regMobile = /^(0|86|17951)?(13[0-9]|15[0123456789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-      if (regMobile.test(value) == true) {
-        return callback();
+    var email = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入邮箱'))
+      } else if (!/^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/.test(value)) {
+        return callback(new Error('请输入正确的邮箱'))
       } else {
-        callback(new Error("请输入合法的手机号"));
+        callback()
       }
     };
-    // 验证输入的手机号验证码是否和存储的验证码相同
-    var checkPhoneCode = (rules, value, callback) => {
-      if (value == this.loginForm.contenttext) {
-        return callback();
+    var password = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入密码'))
+      } else if (!/(?=.*[a-zA-Z])[a-zA-Z0-9]{6,18}/.test(value)) {
+        return callback(new Error("密码长度在6-18个字符，只能包含数字、大小写字母 且 至少包含一个字母"))
       } else {
-        callback(new Error("验证码错误"));
+        callback()
       }
     };
+    var code = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入6位验证码'))
+      } else if (value.length !== 6) {
+        return callback(new Error('请输入6位验证码'))
+      } else {
+        callback()
+      }
+    }
     return {
-      // 表单
-      loginForm: {
-        phone: "",
-        password: "",
-        verificationCode: "", //表单中展示的验证码
-        contenttext: "", //向手机号发送的随机验证码
-        timer: null,
-        showloginCode: true, //判断展示‘获取验证码’或‘倒计时’
-        count: "", //倒计时时间
+      // 倒计时
+      disabled: false,
+      msg: '点击获取验证码',
+      count: 60,
+      timer: 0,
+      // 按钮加载
+      loading: false,
+      // 找回密码
+      dialogFormVisible: false,
+      findPasswordForm: {
+        email: '',
+        password: '',
+        code: ''
       },
-      // 验证规则
-      loginFormRules: {
-        phone: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-          { validator: checkMobile, trigger: "blur" },
+      rules: {
+        email: [
+          {validator: email, trigger: 'blur'}
         ],
-        verificationCode: [
-          { required: true, message: "请输入手机验证码", trigger: "blur" },
-          { validator: checkPhoneCode, trigger: "blur" },
+        password: [
+          {validator: password, trigger: 'blur'}
         ],
+        code: [
+          {validator: code, trigger: 'blur'}
+        ]
       },
     };
   },
   methods: {
-    // 获取手机验证码
-    getloginPhoneCode() {
-      // 如果未输入手机号，结束执行
-      if (this.loginForm.phone == "") {
-        return;
-      }
-      // 获取随机数（4位数字）
-      var numCode = "";
-      for (var i = 0; i < 4; i++) {
-        numCode += Math.floor(Math.random() * 10);
-      }
-      // 存储发送的验证码,用于验证输入的手机验证码是否和本地存储的相同
-      this.loginForm.contenttext = numCode;
-      // 向手机号发送验证码传入的参数
-      let phoneCode = {
-        phonenum: this.loginForm.phone,
-        contenttext: "您正在修改密码，验证码为:" + numCode + "，切勿将验证码泄露给他人。",
-      };
-      // 调用接口，向手机号发送验证码
-      this.$axios.post("接口地址", phoneCode).then((res) => {
-        if (res.status != 200) {
-          return this.$message.error("验证码发送失败！");
-        } else {
-          // 当验证码发送成功，开始60秒倒计时
-          const TIME_COUNT = 60;
-          if (!this.loginForm.timer) {
-            this.loginForm.showloginCode = false;
-            this.loginForm.count = TIME_COUNT;
-            this.loginForm.timer = setInterval(() => {
-              if (
-                  this.loginForm.count > 0 &&
-                  this.loginForm.count <= TIME_COUNT
-              ) {
-                this.loginForm.count -= 1;
-              } else {
-                this.loginForm.showloginCode = true;
-                clearInterval(this.loginForm.timer);
-                this.loginForm.timer = null;
-              }
-            }, 1000);
-          }
-        }
-      });
-    },
-    // 开始登录
-    login() {
-      this.$refs.loginFormRef.validate((valid) => {
+    // 修改密码
+    submitFindPassword(formName) {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log("开始登录");
-        } else {
-          console.log("error submit!!");
+          this.loading = true
+          // 请求
+          user.findPassword(this.findPasswordForm).then(_ => {
+            if (_) {
+              // 请求成功
+              this.$message({
+                message: '密码修改成功',
+                type: 'success'
+              })
+              this.dialogFormVisible = false
+            }
+          }).finally(_ => {
+            this.loading = false
+          })
+        }
+      })
+    },
+    // 获取验证码
+    sendEmailCode() {
+      this.$refs.findPasswordForm.validateField('email', result => {
+        if (!result) {
+          // 按钮倒计时
+          this.disabled = true;
+          this.msg = this.count-- + 's后重新获取';
+          this.timer = setInterval(() => {
+            this.msg = this.count-- + 's后重新获取';
+            if (this.count < 0) {
+              this.msg = '点击获取验证码';
+              this.count = 60;
+              this.disabled = false;
+              clearInterval(this.timer);
+            }
+          }, 1000);
+
+          // 发送验证码请求
+          common.getRequestCode(this.findPasswordForm.email).then(_ => {
+            common.getEmailCode(this.findPasswordForm.email, _.data.permissionCode).then(_ => {
+              if (_) {
+                // 通知邮箱发送
+                this.$notify({
+                  title: '邮箱验证码已发送',
+                  message: '验证码有效时长5分钟, 失效请重新发送',
+                  type: 'success',
+                  duration: 10 * 1000
+                })
+              }
+            })
+          })
         }
       });
     },
-  },
+  }
 };
 </script>
 <style scoped>
@@ -135,6 +152,7 @@ export default {
   width: 500px;
   margin: 0 auto;
 }
+
 .btns {
   text-align: right;
 }
@@ -146,6 +164,7 @@ export default {
   position: fixed;
   background-size: 100% 100%;
 }
+
 .loginContainer {
   border-radius: 15px;
   background-clip: padding-box;
@@ -155,4 +174,17 @@ export default {
   background: #dfe0cd;
   border: 1px solid #99ccd1;
 }
+
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 </style>

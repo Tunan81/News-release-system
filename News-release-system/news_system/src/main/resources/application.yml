@@ -5,10 +5,33 @@ spring:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC # 你的数据库地址
     username: root # 你的数据库用户名
     password: 261615 # 你的数据库密码
+  redis:
+    port: 6379 # 你的redis端口号
+    host: localhost # 你的redis地址
+  jackson:
+    time-zone: GMT+8 # 时区
+    date-format: yyyy-MM-dd HH:mm:ss # 日期格式
+  profiles:
+    include: email
   servlet:
     multipart:
       max-file-size: 100MB # 单个文件最大
       max-request-size: 100MB # 总上传大小
+  mail:
+    username: 2636340500@qq.com
+    password: ydlgnpuudntadjji
+    host: smtp.qq.com
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
 
 application:
   store:

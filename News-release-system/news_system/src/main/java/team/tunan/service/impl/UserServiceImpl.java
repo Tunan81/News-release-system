@@ -6,8 +6,14 @@ import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import team.tunan.common.Constants;
+import team.tunan.common.HttpCodeEnum;
+import team.tunan.dto.LoginParam;
 import team.tunan.dto.UserDTO;
 import team.tunan.entity.Menu;
 import team.tunan.entity.User;
@@ -17,14 +23,15 @@ import team.tunan.mapper.RoleMenuMapper;
 import team.tunan.mapper.UserMapper;
 import team.tunan.service.IMenuService;
 import team.tunan.service.IUserService;
+import team.tunan.utils.StringUtil;
 import team.tunan.utils.TokenUtils;
+import team.tunan.vo.R;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Tunan
  * @since 2023-03-28
  */
@@ -41,8 +48,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Resource
     private IMenuService menuService;
+
+    private IUserService userService;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
     /**
      * 保存用户
+     *
      * @param user
      * @return
      */
@@ -54,6 +68,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     /**
      * 获取当前角色的菜单列表
+     *
      * @param roleFlag
      * @return
      */
@@ -79,6 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     /**
      * 重置密码
+     *
      * @param userDTO
      * @return
      */
@@ -88,7 +104,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (userInfo == null) {
             return false;
         }
-        if (userInfo.getPassword().equals("123456")){
+        if (userInfo.getPassword().equals("123456")) {
             return false;
         }
         userInfo.setPassword("123456");
@@ -98,6 +114,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     /**
      * 更新用户状态
+     *
      * @param userDTO
      * @return
      */
@@ -107,9 +124,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (userInfo == null) {
             return false;
         }
-        if (userInfo.getStatus() == 1){
+        if (userInfo.getStatus() == 1) {
             userInfo.setStatus(0);
-        }else {
+        } else {
             userInfo.setStatus(1);
         }
         saveOrUpdate(userInfo);
@@ -118,6 +135,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     /**
      * 登录
+     *
      * @param userDTO
      * @return
      */
@@ -125,25 +143,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public UserDTO login(UserDTO userDTO) {
         User user = getUserInfo(userDTO);
         if (user == null) {
-            throw new ServiceException(Constants.CODE_600,"用户名或密码错误");
+            throw new ServiceException(Constants.CODE_600, "用户名或密码错误");
         }
         if (user.getStatus() == 1) {
             //将user的属性拷贝到userDTO中
-            BeanUtil.copyProperties(user,userDTO,true);
+            BeanUtil.copyProperties(user, userDTO, true);
             //设置token
-            String token = TokenUtils.genToken(user.getUserId().toString(),user.getPassword());
+            String token = TokenUtils.genToken(user.getUserId().toString(), user.getPassword());
             userDTO.setToken(token);
             String role = user.getRole(); // 获取用户角色
             List<Menu> roleMenus = getRoleMenus(role); // 获取当前角色的菜单列表
             userDTO.setMenus(roleMenus); // 设置菜单列表
             return userDTO;
-        }else {
-            throw new ServiceException(Constants.CODE_600,"用户已被禁用");
+        } else {
+            throw new ServiceException(Constants.CODE_600, "用户已被禁用");
         }
     }
 
     /**
      * 注册
+     *
      * @param userDTO
      * @return
      */
@@ -166,6 +185,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     /**
      * 获取用户信息
+     *
      * @param userDTO
      * @return
      */
@@ -181,5 +201,58 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return null;
         }
         return one;
+    }
+
+    @Override
+    public R findPassword(LoginParam loginParam) {
+        if (loginParam == null) return R.error(HttpCodeEnum.PARAM_ILLEGAL);
+
+        // 获取参数
+        String email = loginParam.getEmail();
+        String password = loginParam.getPassword();
+        String code = loginParam.getCode();
+
+        if (StringUtils.isAnyBlank(email, password, code)) {
+            // 非空
+            return R.error(HttpCodeEnum.PARAM_ILLEGAL);
+        }else if (!StringUtil.checkEmail(email)) {
+            // 邮箱格式校验
+            return R.error(HttpCodeEnum.EMAIL_ERROR);
+        }else if (!StringUtil.checkPassword(password) || code.length() != 6) {
+            // 密码格式和验证码长度校验
+            return R.error(HttpCodeEnum.PARAM_ILLEGAL);
+        }
+
+        // 构造查询条件对象
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("user_id"); // 查询指定字段
+        wrapper.eq("email", email); // 查询邮箱
+        wrapper.last("limit 1"); // 只查询一条数据
+
+
+        // 查询用户，是否存在
+        User user = this.baseMapper.selectOne(wrapper);
+        if (user == null) {
+            return R.error(HttpCodeEnum.USER_NOT_EXIST);
+        }
+
+        // 获取正确的验证码
+        String rightCode = redisTemplate.opsForValue().get(Constants.EMAIL + email);
+        if (!code.equals(rightCode)) {
+            // 验证码比对
+            return R.error(HttpCodeEnum.CODE_ERROR);
+        }
+
+        // 删除验证码
+        redisTemplate.delete(Constants.EMAIL + email);
+
+        // 修改密码
+        User user1 = new User();
+        user1.setUserId(user.getUserId());
+        user1.setPassword(DigestUtils.md5Hex(password));
+
+        // 修改
+        return this.baseMapper.updateById(user1) == 0 ? R.error(HttpCodeEnum.UNKNOWN_ERROR) : R.ok();
+
     }
 }

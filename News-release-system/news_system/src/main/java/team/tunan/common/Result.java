@@ -32,4 +32,7 @@ public class Result {
         return new Result(Constants.CODE_500, "系统错误", null);
     }
 
+    public static Result success(String code, String msg) {
+        return new Result(code, msg, null);
+    }
 }
