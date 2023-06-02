@@ -11,9 +11,6 @@ import java.io.Serializable;
 
 
 /**
- * <p>
- * 
- * </p>
  *
  * @author Tunan
  * @since 2023-03-28
@@ -23,7 +20,7 @@ import java.io.Serializable;
 @TableName("user")
 public class User implements Serializable {
 
-    @TableId(value = "user_id",type = IdType.AUTO)
+    @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
 
     private String username;
@@ -39,10 +36,14 @@ public class User implements Serializable {
     private String role;
 
     private Integer status;
+
     private String password;
+
     private String avatar;
 
     private String email;
+
+    private String phone;
 
     @TableField(exist = false)
     private String code; //验证码

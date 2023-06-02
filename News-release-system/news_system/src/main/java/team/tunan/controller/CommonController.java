@@ -9,6 +9,7 @@ import team.tunan.vo.R;
 /**
  * @author Tunan
  * @version 1.0
+ * @date 2023/6/1 10:18
  */
 @RestController
 @RequestMapping("/common")
@@ -27,6 +28,18 @@ public class CommonController {
     @PostMapping("code/email")
     public R sendEmailCode(@RequestBody LoginParam loginParam) {
         return commonService.sendEmailCode(loginParam);
+    }
+
+    // 权限码请求接口
+    @PostMapping("code/phone/request")
+    public R getPhoneRequestPermissionCode(@RequestBody String phoneJson) {
+        return commonService.getPhoneRequestPermissionCode(phoneJson);
+    }
+
+    // 手机验证码接口
+    @PostMapping("code/phone")
+    public R sendPhoneCode(@RequestBody LoginParam loginParam) {
+        return commonService.sendPhoneCode(loginParam);
     }
 
 }

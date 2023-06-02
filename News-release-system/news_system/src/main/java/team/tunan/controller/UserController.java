@@ -96,7 +96,6 @@ public class UserController {
     //修改密码
     @PostMapping("/resetPassword")
     public Boolean resetPassword(@RequestBody UserDTO user) {
-        System.out.println(user);
         return userService.resetPassword(user);
     }
 
@@ -132,13 +131,13 @@ public class UserController {
     @GetMapping("/page")
     public Result findPage(@RequestParam Integer pageNum,
                            @RequestParam Integer pageSize,
-                           @RequestParam(defaultValue = "") String userName,
+                           @RequestParam(defaultValue = "") String username,
                            @RequestParam(defaultValue = "") String degree,
                            @RequestParam(defaultValue = "") String role) {
         IPage<User> page = new Page<>(pageNum, pageSize);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        if (!userName.equals("")) {
-            queryWrapper.like("username", userName);
+        if (!username.equals("")) {
+            queryWrapper.like("username", username);
         }
         if (!degree.equals("")) {
             queryWrapper.like("degree", degree);
@@ -154,6 +153,12 @@ public class UserController {
     @PostMapping("/findPassword")
     public R findPassword(@RequestBody LoginParam loginParam) {
         return userService.findPassword(loginParam);
+    }
+
+    // 通过手机号找回密码
+    @PostMapping("/findPasswordByPhone")
+    public R findPasswordByPhone(@RequestBody LoginParam loginParam) {
+        return userService.findPasswordByPhone(loginParam);
     }
 
 }

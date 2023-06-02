@@ -152,7 +152,7 @@
 </template>
 
 <script>
-import globalTitle from '../GlobalTitle.vue'
+import globalTitle from '../components/GlobalTitle.vue'
 
 export default {
   components: { globalTitle },

@@ -18,9 +18,17 @@
   </div>
 </template>
 <script>
-//import { getNewsList } from '../api/api'
 import {getNewsList} from "@/api/api";
 import {formatDate} from "@/utils/date";
+
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.substr(0, maxLength) + '...';
+  } else {
+    return text;
+  }
+}
+
 export default {
   name: 'work',
   data() {
@@ -44,6 +52,9 @@ export default {
           console.log(res)
           if (res.code == 200) {
             this.workList = res.data.records
+            this.workList.forEach(item => { // 截取标题
+              item.title = truncateText(item.title, 20)
+            })
           }
         })
         .catch(error => {

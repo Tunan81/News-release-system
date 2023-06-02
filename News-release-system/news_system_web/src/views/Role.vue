@@ -11,17 +11,6 @@
     <!--      表格外部操作部分          -->
     <div style="margin: 10px 0">
       <el-button type="primary" @click="handleAdd">新增 <i class="el-icon-circle-plus-outline"></i></el-button>
-      <el-popconfirm
-          class="ml-5"
-          confirm-button-text='确定'
-          cancel-button-text='我再想想'
-          icon="el-icon-info"
-          icon-color="red"
-          title="您确定批量删除这些数据吗？"
-          @confirm="delBatch"
-      >
-        <el-button type="danger" slot="reference">批量删除 <i class="el-icon-remove-outline"></i></el-button>
-      </el-popconfirm>
     </div>
     <!--        表格内部操作部分        -->
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"
@@ -186,17 +175,6 @@ export default {
     handleSelectionChange(val) {
       console.log(val)
       this.multipleSelection = val
-    },
-    delBatch() {
-      let ids = this.multipleSelection.map(v => v.id)  // [{}, {}, {}] => [1,2,3]
-      this.request.post("/role/del/batch", ids).then(res => {
-        if (res) {
-          this.$message.success("批量删除成功")
-          this.load()
-        } else {
-          this.$message.error("批量删除失败")
-        }
-      })
     },
     reset() {
       this.name = ""

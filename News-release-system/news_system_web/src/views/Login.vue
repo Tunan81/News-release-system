@@ -30,7 +30,10 @@
       </el-form-item>
       <div style="margin-bottom: 20px;margin-top: 0px">
         <a href="./register" style="margin-left:0px;text-decoration: none;color: #4f84d4">立即注册</a>
-        <span @click="dialogFormVisible = true" style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>
+        <!--        <span @click="dialogFormVisible = true"
+                      style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>-->
+        <span @click="phoneDialogVisible = true"
+              style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>
       </div>
       <el-button type="primary" style="width:100%;margin-bottom: 5px" @click="UserLogin">登录</el-button>
       <br>
@@ -58,7 +61,6 @@
           <el-input prefix-icon="el-icon-lock" placeholder="请填写 6-18 位密码" type="password" maxlength="18"
                     v-model="findPasswordForm.password" show-password></el-input>
         </el-form-item>
-
         <el-form-item label="验证码" prop="code">
           <el-input prefix-icon="el-icon-key" placeholder="请填写6位数字验证码" type="number" maxlength="6"
                     v-model="findPasswordForm.code">
@@ -66,9 +68,41 @@
           </el-input>
         </el-form-item>
       </el-form>
-
       <div slot="footer" class="dialog-footer">
         <el-button type="danger" :loading="loading" @click="submitFindPassword('findPasswordForm')">提 交</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 修改密码 -->
+    <el-dialog title="修改密码" :visible.sync="phoneDialogVisible" width="40%" append-to-body>
+      <el-form :model="phoneFindPasswordForm" ref="phoneFindPasswordForm" :rules="rules" label-width="70px">
+        <el-form-item label="手机号码" prop="phone">
+          <el-input prefix-icon="el-icon-phone" placeholder="请填写手机号码" maxlength="11"
+                    v-model="phoneFindPasswordForm.phone"></el-input>
+        </el-form-item>
+
+        <el-form-item label="新密码" prop="password">
+          <el-input prefix-icon="el-icon-lock" placeholder="请填写 6-18 位密码" type="password" maxlength="18"
+                    v-model="phoneFindPasswordForm.password" show-password></el-input>
+        </el-form-item>
+
+        <el-form-item label="验证码" prop="code">
+          <el-row :gutter="10">
+            <el-col :span="14">
+              <el-input prefix-icon="el-icon-key" placeholder="请填写6位数字验证码" type="number" maxlength="6"
+                        v-model="phoneFindPasswordForm.code"></el-input>
+            </el-col>
+            <el-col :span="10">
+              <el-button @click="sendPhoneCode()" :disabled="disabled">{{ msg }}</el-button>
+            </el-col>
+          </el-row>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button type="default" @click="phoneDialogVisible = false">取消</el-button>
+        <el-button type="danger" :loading="loading" @click="submitPhoneFindPassword('phoneFindPasswordForm')">提 交
+        </el-button>
       </div>
     </el-dialog>
   </div>
@@ -102,6 +136,15 @@ export default {
         callback()
       }
     };
+    var phone = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入手机号'))
+      } else if (!/^1[3456789]\d{9}$/.test(value)) {
+        return callback(new Error('请输入正确的手机号'))
+      } else {
+        callback()
+      }
+    };
     var code = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('请输入6位验证码'))
@@ -126,6 +169,12 @@ export default {
         password: '',
         code: ''
       },
+      phoneDialogVisible: false,
+      phoneFindPasswordForm: {
+        phone: '',
+        password: '',
+        code: ''
+      },
       // 登录
       loginUser: {
         userId: "",
@@ -147,6 +196,7 @@ export default {
         code: [{required: true, message: "请输入验证码", trigger: "blur"}],
         email: [{validator: email, trigger: 'blur'}],
         password: [{validator: password, trigger: 'blur'}],
+        phone: [{validator: phone, trigger: 'blur'}],
       },
       isDuplicate: false // 初始化为未重复
     }
@@ -244,6 +294,59 @@ export default {
                 // 通知邮箱发送
                 this.$notify({
                   title: '邮箱验证码已发送',
+                  message: '验证码有效时长5分钟, 失效请重新发送',
+                  type: 'success',
+                  duration: 10 * 1000
+                })
+              }
+            })
+          })
+        }
+      });
+    },
+    submitPhoneFindPassword(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.loading = true
+          // 请求
+          user.phoneFindPassword(this.phoneFindPasswordForm).then(_ => {
+            if (_) {
+              // 请求成功
+              this.$message({
+                message: '密码修改成功',
+                type: 'success'
+              })
+              this.phoneDialogVisible = false
+            }
+          }).finally(_ => {
+            this.loading = false
+          })
+        }
+      })
+    },
+    sendPhoneCode() {
+      this.$refs.phoneFindPasswordForm.validateField('phone', result => {
+        if (!result) {
+          // 按钮倒计时
+          this.disabled = true;
+          this.msg = this.count-- + 's后重新获取';
+          this.timer = setInterval(() => {
+            this.msg = this.count-- + 's后重新获取';
+            if (this.count < 0) {
+              this.msg = '点击获取验证码';
+              this.count = 60;
+              this.disabled = false;
+              clearInterval(this.timer);
+            }
+          }, 1000);
+
+          // 发送验证码请求
+          common.getPhoneRequestCode(this.phoneFindPasswordForm.phone).then(_ => {
+            common.getPhoneCode(this.phoneFindPasswordForm.phone, _.data.permissionCode).then(_ => {
+              if (_) {
+                // 通知手机短信发送
+                this.$notify({
+                  title: '短信验证码已发送',
                   message: '验证码有效时长5分钟, 失效请重新发送',
                   type: 'success',
                   duration: 10 * 1000

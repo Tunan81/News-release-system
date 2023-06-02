@@ -14,8 +14,11 @@ public interface Constants {
     Object DICT_TYPE_ICON = "icon";
 
     //key
-    String EMAIL = "EMAIL_";
-    String EMAIL_REQUEST_VERIFY = "EMAIL_REQUEST_VERIFY_";
+    String EMAIL = "EMAIL_"; // 邮箱
+    String EMAIL_REQUEST_VERIFY = "EMAIL_REQUEST_VERIFY_"; // 邮箱验证码
+
+    String PHONE = "PHONE_"; // 手机号
+    String PHONE_REQUEST_VERIFY = "PHONE_REQUEST_VERIFY_"; // 手机验证码
 
     //缓存时间
     int EXPIRE_TEN_SECOND = 10; // 10s

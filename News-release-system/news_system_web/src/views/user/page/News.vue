@@ -15,7 +15,7 @@
 <script>
 import {getnew} from "@/api/api";
 import {formatDate} from "@/utils/date";
-import Backtop from "@/components/backtop";
+import Backtop from "@/components/backtop.vue";
 
 export default {
   name: 'News',

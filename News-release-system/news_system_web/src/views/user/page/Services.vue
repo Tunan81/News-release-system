@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import globalTitle from '../GlobalTitle.vue'
+import globalTitle from '../components/GlobalTitle.vue'
 //import { getMinTitle, getNewsList, getnew } from '../../api/api'
 
 export default {
-  name: 'Introduce',
+  name: 'Services',
   components: {
     globalTitle
   },
@@ -67,27 +67,23 @@ export default {
     this.menuList = [
       {
         id: 1,
-        name: '学院简介'
+        name: '常用电话'
       },
       {
         id: 2,
-        name: '校长寄语'
+        name: '后勤服务'
       },
       {
         id: 3,
-        name: '荣誉校长'
+        name: '校长信箱'
       },
       {
         id: 4,
-        name: '现任领导'
+        name: '交通路线'
       },
       {
         id: 5,
-        name: '重庆工程学院章程'
-      },
-      {
-        id: 6,
-        name: '学校风光'
+        name: '校车路线'
       }
     ]
   },
@@ -143,59 +139,6 @@ export default {
       // console.log(item.id);
       this.$router.push({path: '/home/news', query: {id: item.id}})
     }
-    /*  //获取小标题的id
-      getTitle() {
-        const data = Number(this.$route.query.id)
-        getMinTitle(data)
-          .then(res => {
-            // console.log(res);
-            if (res.code == 200) {
-              this.menuList = res.data
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      },
-      //小标题菜单的球切换
-      changeMenu(val) {
-        this.cont = val.name
-        this.getnews(val)
-      },
-      //获取到了新闻列表，里边只有一个对象
-      getnews(item) {
-        const data = {
-          current: 1,
-          newsCategoryId: item.id,
-          size: 5
-        }
-        getNewsList(data)
-          .then(res => {
-            // console.log(res);
-            if (res.code == 200) {
-              this.newsList = res.data.records
-              this.getalone(this.newsList[0].id)
-            }
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      },
-      //获取新闻内容,得到一个新闻对象
-      getalone(id) {
-        const data = id
-        getnew(data)
-          .then(res => {
-            // console.log(res);
-            if (res.code == 200) {
-              this.new = res.data
-              console.log(this.new.content)
-            }
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      }*/
   }
 }
 </script>
@@ -204,12 +147,12 @@ ul {
   width: 200px;
 }
 
-  li {
-    background-color: rgb(242, 243, 245);
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-  }
+li {
+  background-color: rgb(242, 243, 245);
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
 
 
 .ft-blue {

@@ -13,8 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum HttpCodeEnum {
 
-    //======================= 邮箱枚举 ==============================
+    //======================= 通用枚举 ==============================
     EMAIL_ERROR(4001, "邮箱格式不正确"),
+
+    PHONE_ERROR(4001, "手机号格式不正确"),
     PARAM_ERROR(4002, "参数格式不正确"),
     CODE_ERROR(4002, "验证码不正确"),
     PASSWORD_ERROR(4003, "密码错误"),

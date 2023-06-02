@@ -2,15 +2,17 @@ package team.tunan.service.impl;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.crypto.digest.MD5;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import team.tunan.common.Constants;
 import team.tunan.common.HttpCodeEnum;
 import team.tunan.dto.LoginParam;
@@ -29,6 +31,7 @@ import team.tunan.vo.R;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,6 +57,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     /**
      * 保存用户
      *
@@ -62,6 +68,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public Boolean saveUser(User user) {
+        if (user.getStatus() == null) {
+            user.setStatus(1);
+        }
         return saveOrUpdate(user);
     }
 
@@ -100,14 +109,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public Boolean resetPassword(UserDTO userDTO) {
-        User userInfo = getUserInfo(userDTO);
+        User userInfo = getUserInfoById(userDTO);
         if (userInfo == null) {
             return false;
         }
-        if (userInfo.getPassword().equals("123456")) {
-            return false;
-        }
-        userInfo.setPassword("123456");
+        userInfo.setPassword(DigestUtils.md5Hex("123456"));
         saveOrUpdate(userInfo);
         return true;
     }
@@ -120,7 +126,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public Boolean updateState(UserDTO userDTO) {
-        User userInfo = getUserInfo(userDTO);
+        User userInfo = getUserInfoById(userDTO);
         if (userInfo == null) {
             return false;
         }
@@ -204,6 +210,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    public User getUserInfoById(UserDTO userDTO) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userDTO.getUserId());
+        User one;
+        try {
+            one = getOne(queryWrapper); // 从数据库查询用户信息
+        } catch (Exception e) {
+            LOG.error(e);
+            return null;
+        }
+        return one;
+    }
+
+
+    @Override
     public R findPassword(LoginParam loginParam) {
         if (loginParam == null) return R.error(HttpCodeEnum.PARAM_ILLEGAL);
 
@@ -215,10 +236,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (StringUtils.isAnyBlank(email, password, code)) {
             // 非空
             return R.error(HttpCodeEnum.PARAM_ILLEGAL);
-        }else if (!StringUtil.checkEmail(email)) {
+        } else if (!StringUtil.checkEmail(email)) {
             // 邮箱格式校验
             return R.error(HttpCodeEnum.EMAIL_ERROR);
-        }else if (!StringUtil.checkPassword(password) || code.length() != 6) {
+        } else if (!StringUtil.checkPassword(password) || code.length() != 6) {
             // 密码格式和验证码长度校验
             return R.error(HttpCodeEnum.PARAM_ILLEGAL);
         }
@@ -254,5 +275,49 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 修改
         return this.baseMapper.updateById(user1) == 0 ? R.error(HttpCodeEnum.UNKNOWN_ERROR) : R.ok();
 
+    }
+
+    @Override
+    public R findPasswordByPhone(LoginParam loginParam) {
+        if (loginParam == null) return R.error(HttpCodeEnum.PARAM_ILLEGAL);
+
+        // 获取参数
+        String phone = loginParam.getPhone();
+        String password = loginParam.getPassword();
+        String code = loginParam.getCode();
+
+        if (StringUtils.isAnyBlank(phone, password, code)) {
+            // 非空
+            return R.error(HttpCodeEnum.PARAM_ILLEGAL);
+        } else if (!StringUtil.checkPhone(phone)) {
+            // 手机号格式校验
+            return R.error(HttpCodeEnum.PHONE_ERROR);
+        } else if (!StringUtil.checkPassword(password) || code.length() != 6) {
+            // 密码格式和验证码长度校验
+            return R.error(HttpCodeEnum.PARAM_ILLEGAL);
+        }
+
+        // 构造查询条件对象
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("user_id"); // 查询指定字段
+        wrapper.eq("phone", phone); // 查询手机号
+        wrapper.last("limit 1"); // 只查询一条数据
+
+        User user = this.baseMapper.selectOne(wrapper);
+        if (user == null) {
+            return R.error(HttpCodeEnum.USER_NOT_EXIST);
+        }
+        String rightCode = redisTemplate.opsForValue().get(Constants.PHONE + phone);
+        if (!code.equals(rightCode)) {
+            // 验证码比对
+            return R.error(HttpCodeEnum.CODE_ERROR);
+        }
+
+        // 删除验证码
+        redisTemplate.delete(Constants.PHONE + phone);
+        User user1 = new User();
+        user1.setUserId(user.getUserId());
+        user1.setPassword(DigestUtils.md5Hex(password));
+        return this.baseMapper.updateById(user1) == 0 ? R.error(HttpCodeEnum.UNKNOWN_ERROR) : R.ok();
     }
 }

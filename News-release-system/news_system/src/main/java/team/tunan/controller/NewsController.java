@@ -167,7 +167,6 @@ public class NewsController {
     @PostMapping("/list")
     public Result pagingQueryListByNewsCategoryId(PagingQueryListByNewsCategoryIdVO vo) {
         return Result.success(newsService.getNewsListByNewsCategoryId(vo.getNewsCategoryId(), vo.getCurrent(), vo.getSize()));
-
     }
 
     /**
@@ -181,5 +180,6 @@ public class NewsController {
         NewsQueryDTO news = newsService.getNewsById(id);
         return Result.success(news);
     }
+
 }
 

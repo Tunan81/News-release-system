@@ -35,7 +35,7 @@
 
     <!-- 定位fixed -->
     <div class='fixed1'>
-      <a @click="$router.push('Info')"><img src='~@/assets/front/phone.jpg' alt=''/></a>
+      <a @click="$router.push('/InfoUs')"><img src='~@/assets/front/phone.jpg' alt=''/></a>
     </div>
     <div class='fixed2'>
       <a @click="$router.push('/MapView')"><img src='~@/assets/front/map.jpg' alt=''/></a>

@@ -29,5 +29,31 @@ export default {
             method: 'post',
             data: param
         })
+    },
+
+    getPhoneRequestCode(phone) {
+        return request({
+            url: '/common/code/phone/request',
+            method: 'post',
+            data: {
+                phone: phone
+            }
+        })
+    },
+
+    /**
+     * 3.获取手机验证码
+     * @param {*} phone
+     * @returns
+     */
+    getPhoneCode(phone, code) {
+        let param = {}
+        param['phone'] = phone
+        param['code'] = code
+        return request({
+            url: '/common/code/phone',
+            method: 'post',
+            data: param
+        })
     }
 }

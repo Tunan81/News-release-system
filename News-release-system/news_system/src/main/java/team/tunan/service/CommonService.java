@@ -25,4 +25,11 @@ public interface CommonService {
      */
     R sendEmailCode(LoginParam loginParam);
 
+    R getPhoneRequestPermissionCode(String phoneJson);
+    /**
+     * 发送手机验证码
+     * @param loginParam （手机号和权限码）
+     * @return 是否发送成功
+     */
+    R sendPhoneCode(LoginParam loginParam);
 }

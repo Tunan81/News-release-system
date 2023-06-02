@@ -55,14 +55,3 @@ mybatis-plus:
 files:
   upload:
     path: D:/files/
-
-sms:
-  aliyun:
-    accessKeyID:  xxx # 你的accessKeyID
-    accessKeySecret:  xxx # 你的accessKeySecret
-    domain: dysmsapi.aliyuncs.com # 固定不变
-    regionId: cn-hangzhou # 固定不变
-    templateCode: 你的验证码是 # 你的模板code
-    signName: xxx # 你的签名
-
-

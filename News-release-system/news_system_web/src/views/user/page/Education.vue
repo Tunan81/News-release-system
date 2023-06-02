@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <globalTitle/>
+      <globalTitle />
     </el-row>
     <el-row class='mart10'>
       <!-- 小标题 -->
@@ -13,7 +13,6 @@
           </li>
         </ul>
       </el-col>
-      <!-- 新闻内容 -->
       <el-card class='box-card'>
         <p class='name'>{{ this.cont }}</p>
         <hr class='namehr'/>
@@ -39,18 +38,20 @@
 </template>
 
 <script>
-import globalTitle from '../GlobalTitle.vue'
+import globalTitle from '../components/GlobalTitle.vue'
 //import { getMinTitle, getNewsList } from '../../api/api'
 
 export default {
-  components: {globalTitle},
-  name: 'Competition',
+  name: 'Education',
+  components: {
+    globalTitle
+  },
   data() {
     return {
-      cont: '',
+      cont: '', //小标题变色
       menuList: [],
       newsList: [],
-      pageSize: 6,
+      pageSize: 5,
       currentPage: 1,
       total: 0,
       item: {}
@@ -63,20 +64,16 @@ export default {
     this.menuList = [
       {
         id: 1,
-        name: '竞赛动态'
+        name: '学院风纪'
       },
       {
         id: 2,
-        name: '竞赛通知'
+        name: '学习建设'
       },
       {
         id: 3,
-        name: '竞赛成果'
+        name: '考风考纪'
       },
-      {
-        id: 4,
-        name: '竞赛指导'
-      }
     ]
   },
   watch: {
@@ -87,10 +84,6 @@ export default {
     }
   },
   methods: {
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
-      this.getnews(this.item)
-    },
     getTitle() {
       const data = Number(this.$route.query.id)
       getMinTitle(data)
@@ -128,10 +121,15 @@ export default {
             console.log(error)
           })
     },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`)
+      // this.currentPage = val
+      this.getnews(this.item)
+    },
     // 跳转到新闻展示页面
     show(item) {
       // console.log(item.id);
-      this.$router.push({path: '/userHome/news', query: {id: item.id}})
+      this.$router.push({path: '/home/news', query: {id: item.id}})
     }
   }
 }

@@ -8,7 +8,7 @@
       <ul>
         <li :key='index' v-for='(item, index) in schoolList' class='liPointer'>
           <el-card style='margin: 1px ;overflow: hidden;word-break:keep-all;white-space:nowrap;'>
-            <div @click='toSchoolMsg(item.id)'>
+            <div @click='toSchoolMsg(item.id)' style="width: 200px;text-overflow: ellipsis">
               {{ item.title }}
             </div>
           </el-card>
@@ -18,7 +18,15 @@
   </div>
 </template>
 <script>
-//import { getNewsList } from '../api/api'
+import {getNewsList} from "@/api/api";
+
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.substr(0, maxLength) + '...';
+  } else {
+    return text;
+  }
+}
 
 export default {
   name: 'school',
@@ -28,28 +36,23 @@ export default {
     }
   },
   created() {
-    //this.getnews()
-    this.schoolList = [
-      { id: 1, title: "重庆工程学院计算机科学系教授获得国家自然科学基金" },
-      { id: 2, title: "2023年重庆工程学院暑期社会实践活动顺利结束" },
-      { id: 3, title: "重庆工程学院千人计划教授在纳米材料研究领域取得新成果" },
-      { id: 4, title: "学工部举办“青春心向党·建功新时代”主题演讲比赛" },
-      { id: 5, title: "外语系师生参加2023年亚洲大学生英语辩论赛，荣获佳绩" }
-    ];
-
+    this.getnews()
   },
   methods: {
     getnews() {
       const data = {
         current: 1,
-        newsCategoryId: 15,
-        size: 6
+        newsCategoryId: 3,
+        size: 5
       }
       getNewsList(data)
         .then(res => {
           console.log(res)
           if (res.code == 200) {
             this.schoolList = res.data.records
+            this.schoolList.forEach(item => { // 截取标题
+              item.title = truncateText(item.title, 20)
+            })
           }
         })
         .catch(error => {
@@ -68,7 +71,7 @@ export default {
     //前往信息展示页面
     toSchoolMsg(id) {
       this.$router.push({
-        path: '/home/news',
+        path: '/userHome/news',
         query: {
           id: id
         }

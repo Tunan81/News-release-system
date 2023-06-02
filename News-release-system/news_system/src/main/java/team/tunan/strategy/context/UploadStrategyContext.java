@@ -34,4 +34,14 @@ public class UploadStrategyContext {
         return uploadStrategyMap.get(uploadServiceName).uploadFile(file, filePath);
     }
 
+
+    public Map<String, Object> executeUploadEditorStrategy(MultipartFile file, final String filePath, String uploadServiceName) {
+        // 执行特点的上传策略
+        return uploadStrategyMap.get(uploadServiceName).uploadEditorFile(file, filePath);
+    }
+
+    public String executeUploadIconStrategy(MultipartFile file, final String filePath, String uploadServiceName) {
+        // 执行特点的上传策略
+        return uploadStrategyMap.get(uploadServiceName).uploadIconFile(file, filePath);
+    }
 }

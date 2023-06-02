@@ -123,7 +123,7 @@
     </el-dialog>
     <!-- 定义修改密码确认框弹窗 -->
     <el-dialog :visible.sync="resetDialogVisible" title="重置密码" width="30%">
-      <span>您确定要重置用户 {{ this.form.userName }} 的密码吗？</span>
+      <span>您确定要重置用户 {{ this.form.username }} 的密码吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="resetDialogVisible = false">取消</el-button>
         <el-button type="primary" @click="resetPassword">确定</el-button>
@@ -199,11 +199,6 @@ export default {
     },
     // 点击确认框的确定按钮时触发
     resetPassword() {
-      if (this.form.password == "123456"){
-        this.$message.warning("密码已经是初始密码，无需重置")
-        this.resetDialogVisible = false
-        return
-      }
       this.request.post('/user/resetPassword',this.form).then(res => {
         if (res){
           this.$message.success("重置成功")

@@ -1,20 +1,23 @@
 package team.tunan.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.reflect.TypeToken;
+import io.swagger.annotations.ApiOperation;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import javax.annotation.Resource;
-import java.util.List;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import team.tunan.common.Result;
-
+import team.tunan.dto.NewsCategoryDTO;
 import team.tunan.dto.NewsTypeCategoryDTO;
+import team.tunan.entity.NewsCategory;
 import team.tunan.mapper.NewsTypeCategoryMapper;
 import team.tunan.service.INewsCategoryService;
-import team.tunan.entity.NewsCategory;
+import team.tunan.vo.news.category.NewsCategoryListVO;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -27,6 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/newsCategory")
 public class NewsCategoryController {
+    @Autowired
+    ModelMapper modelMapper;
 
     @Resource
     private INewsCategoryService newsCategoryService;
@@ -77,5 +82,16 @@ public class NewsCategoryController {
         return Result.success(newsCategoryService.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
 
+    /**
+     * 根据新闻类型id（大标题id）查询新闻类别列表
+     * @param id 新闻类型id（大标题id）
+     * @return 新闻类别列表
+     */
+    @ApiOperation(value = "查询新闻类别列表根据新闻类型id（大标题id）")
+    @GetMapping("/list/{typeId}")
+    public Result queryByNewsTypeId(@PathVariable("typeId") Integer id) {
+        List<NewsCategoryDTO> list = newsCategoryService.queryNewCategoryByNewsTypeDd(id);
+        return Result.success(modelMapper.map(list, new TypeToken<List<NewsCategoryListVO>>(){}.getType()));
+    }
 }
 

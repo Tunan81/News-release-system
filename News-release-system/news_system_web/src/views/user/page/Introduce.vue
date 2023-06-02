@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height: 50vh">
     <el-row>
-      <globalTitle />
+      <globalTitle/>
     </el-row>
     <el-row class='mart10'>
       <!-- 小标题 -->
@@ -13,9 +13,11 @@
           </li>
         </ul>
       </el-col>
+      <!-- 新闻内容 news-->
       <el-card class='box-card'>
         <p class='name'>{{ this.cont }}</p>
         <hr class='namehr'/>
+
         <el-col :span='24'>
           <div>
             <el-row class='marb10' :key='index' v-for='(item, index) in newsList'>
@@ -38,52 +40,43 @@
 </template>
 
 <script>
-import globalTitle from '../GlobalTitle.vue'
-//import { getMinTitle, getNewsList } from '../../api/api'
+import globalTitle from '../components/GlobalTitle.vue'
+import {getnew, getNewsList} from "@/api/api";
+import {getMinTitle} from "@/api/NewsCategory";
 
 export default {
-  name: 'Education',
+  name: 'Introduce',
   components: {
     globalTitle
   },
   data() {
     return {
-      cont: '', //小标题变色
-      menuList: [],
-      newsList: [],
       pageSize: 5,
       currentPage: 1,
       total: 0,
-      item: {}
+      item: {},
+      cont: '',
+      menuList: [],
+      newsList: [],
+      new: {} //新闻对象
     }
   },
   created() {
   },
   mounted() {
-    //this.getTitle()
-    this.menuList = [
-      {
-        id: 1,
-        name: '学院风纪'
-      },
-      {
-        id: 2,
-        name: '学习建设'
-      },
-      {
-        id: 3,
-        name: '考风考纪'
-      },
-    ]
+    this.getTitle()
   },
   watch: {
     menuList(n, o) {
       this.cont = this.menuList[0].name
-      this.item = this.menuList[0]
-      this.getnews(this.menuList[0])
+      this.getnews(this.menuList[0]) //改变对象，菜单栏的东西要写到监听属性里边
     }
   },
   methods: {
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`)
+      this.getnews(this.item)
+    },
     getTitle() {
       const data = Number(this.$route.query.id)
       getMinTitle(data)
@@ -121,20 +114,27 @@ export default {
             console.log(error)
           })
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
-      // this.currentPage = val
-      this.getnews(this.item)
-    },
-    // 跳转到新闻展示页面
     show(item) {
       // console.log(item.id);
-      this.$router.push({path: '/home/news', query: {id: item.id}})
+      this.$router.push({path: '/userHome/news', query: {id: item.id}})
+    },
+    //获取新闻内容,得到一个新闻对象
+    getalone(id) {
+      const data = id
+      getnew(data)
+          .then(res => {
+            if (res.code == 200) {
+              this.new = res.data
+              console.log(this.new.content)
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
     }
   }
 }
 </script>
-
 <style scoped>
 ul {
   width: 200px;
@@ -156,13 +156,7 @@ li {
   color: #000;
 }
 
-.box-card {
-  height: 500px;
-  position: relative;
-
-  .fenye {
-    position: absolute;
-    bottom: 10px;
-  }
+.ql-editor {
+  padding: 12px 0px !important;
 }
 </style>

@@ -30,22 +30,23 @@ export default Vue.extend({
       html: '',//当前富文本内容(双向绑定)
       toolbarConfig: { },//工具栏配置,详见文档
       editorConfig: {
-        placeholder: '写点东西吧...',
+        placeholder: '开始编辑新闻吧...',
         MENU_CONF: {
           // 配置上传图片
           uploadImage: {
-            server: 'http://localhost:9090/file/upload/local',
+            server: 'http://localhost:9090/file/upload/editor',
             fidldName: 'file', // 上传图片时，接收图片的接口名称，不填默认为 file
             metaWithUrl: true, // 上传图片时，是否使用图片 url 作为数据的 meta，默认为 false
             headers: { Accept: 'text/x-json' },
+            maxupload: 1, // 限制一次最多上传 1 张图片
+            maxFileSize: 100 * 1024 * 1024, // 100M
 
-            maxFileSize: 10 * 1024 * 1024, // 10M
-
-            base64LimitSize: 5 * 1024 * 1024, // 5MB 以下插入 base64
-            onBeforeUpload(files) {
-              console.log('onBeforeUpload', files)
-              return files // 返回哪些文件可以上传
+            base64LimitSize: 5 * 1024, // 5kb 以下插入 base64
+            onBeforeUpload(file) {
+              console.log('onBeforeUpload', file)
+              return file // 返回哪些文件可以上传
             },
+            //
             onProgress(progress) {
               console.log('onProgress', progress)
             },
@@ -69,9 +70,9 @@ export default Vue.extend({
 
   mounted() {
     // 模拟 ajax 请求，异步渲染编辑器(通常是编辑富文本时传入过来的默认内容)
-/*    setTimeout(() => {
+    setTimeout(() => {
       this.html = '<p>模拟 Ajax 异步设置内容 HTML</p>'
-    }, 1500)*/
+    }, 1500)
   },
 
   methods: {
@@ -81,6 +82,7 @@ export default Vue.extend({
      * @return void
      */
     uploaadImg(file, insertFn){
+      console.log(file)
       this.$emit('uploadImg', file, insertFn)
     },
 

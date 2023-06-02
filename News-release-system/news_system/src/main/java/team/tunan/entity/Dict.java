@@ -6,6 +6,8 @@ import lombok.Data;
 /**
  * @author Tunan
  * @version 1.0
+ * @date 2023/6/1 20:20
+ * @description 图标实体类
  */
 @Data
 @TableName("dict")

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 /**
  * @author Tunan
  * @version 1.0
+ * @date 2023/5/31 20:00
+ * @description 多线程发送邮件
  */
 @Component
 public class ThreadService {
@@ -23,5 +25,4 @@ public class ThreadService {
     public void sendSimpleMail(String to, String theme, String content) {
         mailService.sendSimpleMail(to, theme, content);
     }
-
 }

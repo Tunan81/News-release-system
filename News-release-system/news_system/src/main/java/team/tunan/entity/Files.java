@@ -5,8 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+/**
+ * @author Tunan
+ * @date 2023/6/1 20:20
+ * 文件实体类
+ */
+
 @Data
-@TableName("files")
+@TableName("file")
 public class Files {
 
     @TableId(type = IdType.AUTO)

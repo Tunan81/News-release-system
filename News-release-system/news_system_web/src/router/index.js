@@ -8,24 +8,24 @@ const routes = [
     {
         path: '/userHome',
         name: 'userHome',
-        component: () => import('../views/front/UserHome.vue'),
+        component: () => import('../views/user/UserHome.vue'),
         children: [
-            {path: 'index', name: 'index', component: () => import('../views/front/page/index.vue')},
-            {path: 'info', name: 'Info', component: () => import('../views/front/page/Info.vue')},
-            {path: 'introduce', name: 'Introduce', component: () => import('../views/front/page/Introduce.vue')},
-            {path: 'education', name: 'Education', component: () => import('../views/front/page/Education.vue')},
-            {path: 'star', name: 'Star', component: () => import('../views/front/page/Star.vue')},
-            {path: 'competition', name: 'Competition', component: () => import('../views/front/page/Competition.vue')},
-            {path: 'history', name: 'History', component: () => import('../views/front/page/History.vue')},
-            {path: 'services', name: 'Services', component: () => import('../views/front/page/Services.vue')},
-            {path: 'news', name: 'News', component: () => import('../views/front/page/News.vue'),},
-            {path: 'moreMessage', name: 'moreMessage', component: () => import('../views/front/page/moreMessage.vue')},
+            {path: 'index', name: 'index', component: () => import('../views/user/page/index.vue')},
+            {path: 'info', name: 'Info', component: () => import('../views/user/page/Info.vue')},
+            {path: 'introduce', name: 'Introduce', component: () => import('../views/user/page/Introduce.vue')},
+            {path: 'education', name: 'Education', component: () => import('../views/user/page/Education.vue')},
+            {path: 'star', name: 'Star', component: () => import('../views/user/page/Star.vue')},
+            {path: 'competition', name: 'Competition', component: () => import('../views/user/page/Competition.vue')},
+            {path: 'history', name: 'History', component: () => import('../views/user/page/History.vue')},
+            {path: 'services', name: 'Services', component: () => import('../views/user/page/Services.vue')},
+            {path: 'news', name: 'News', component: () => import('../views/user/page/News.vue'),},
+            {path: 'moreMessage', name: 'moreMessage', component: () => import('../views/user/page/moreMessage.vue')},
         ]
     },
     {
         path: '/MapView',
         name: 'MapView',
-        component: () => import('../views/front/page/MapView.vue')
+        component: () => import('../views/user/page/MapView.vue')
     },
     {
         path: '/login',
@@ -43,18 +43,13 @@ const routes = [
         component: () => import('../components/404.vue')
     },
     {
-        path: '/RePwd',
-        name: 'RePwd',
-        component: () => import('../views/RePwd.vue')
-    },
-    {
-        path:'/',
-        redirect:'/userHome/index'　　//默认显示
+        path: '/',
+        redirect: '/userHome/index'
     },
     {
         path: '/infoUs',
         name: 'infoUs',
-        component: () => import('../views/front/InfoUs.vue')
+        component: () => import('../views/user/page/InfoUs.vue')
     },
     {
         path: '/test',
@@ -63,11 +58,13 @@ const routes = [
     }
 ]
 
+
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
 })
+
 // 提供一个重置路由的方法
 export const resetRouter = () => {
     router.matcher = new VueRouter({
@@ -92,7 +89,8 @@ export const setRoutes = () => {
         }
         const menus = JSON.parse(storeMenus)
         menus.forEach(item => {
-            if (item.path) { // 当且仅当path不为空的时候才去设置路由
+            // 当且仅当path不为空的时候才去设置路由
+            if (item.path) {
                 let itemMenu = {
                     path: item.path.replace("/", ""),
                     name: item.name,
@@ -124,11 +122,19 @@ export const setRoutes = () => {
 // 重置的时候就去设置路由
 setRoutes()
 
+
+// to 将要访问的路径
+// from 代表从哪个路径跳转而来
+// next 是一个函数，表示放行
+//     next()  放行    next('/login')  强制跳转
 router.beforeEach((to, from, next) => {
-    localStorage.setItem("currentPathName", to.name)  // 设置当前的路由名称
-    store.commit("setPath") // 设置当前的路由路径
+    // 设置当前的路由名称
+    localStorage.setItem("currentPathName", to.name)
+    // 设置当前的路由路径
+    store.commit("setPath")
     // 未找到路由的情况
     if (!to.matched.length) {
+        // 获取本地存储的菜单
         const storeMenus = localStorage.getItem("menus")
         if (storeMenus) {
             next("*")
@@ -137,8 +143,6 @@ router.beforeEach((to, from, next) => {
             next("/login")
         }
     }
-    if (to.path === "/userHome") { return next("/userHome/index")}
-    // 其他的情况都放行
     next()
 })
 

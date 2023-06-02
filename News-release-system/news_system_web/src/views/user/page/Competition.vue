@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 50vh">
+  <div>
     <el-row>
       <globalTitle/>
     </el-row>
@@ -13,11 +13,10 @@
           </li>
         </ul>
       </el-col>
-      <!-- 新闻内容 news-->
+      <!-- 新闻内容 -->
       <el-card class='box-card'>
         <p class='name'>{{ this.cont }}</p>
         <hr class='namehr'/>
-
         <el-col :span='24'>
           <div>
             <el-row class='marb10' :key='index' v-for='(item, index) in newsList'>
@@ -40,24 +39,21 @@
 </template>
 
 <script>
-import globalTitle from '../GlobalTitle.vue'
-//import { getMinTitle, getNewsList, getnew } from '../../api/api'
+import globalTitle from '../components/GlobalTitle.vue'
+//import { getMinTitle, getNewsList } from '../../api/api'
 
 export default {
-  name: 'Services',
-  components: {
-    globalTitle
-  },
+  components: {globalTitle},
+  name: 'Competition',
   data() {
     return {
-      pageSize: 5,
-      currentPage: 1,
-      total: 0,
-      item: {},
       cont: '',
       menuList: [],
       newsList: [],
-      new: {} //新闻对象
+      pageSize: 6,
+      currentPage: 1,
+      total: 0,
+      item: {}
     }
   },
   created() {
@@ -67,30 +63,27 @@ export default {
     this.menuList = [
       {
         id: 1,
-        name: '常用电话'
+        name: '竞赛动态'
       },
       {
         id: 2,
-        name: '后勤服务'
+        name: '竞赛通知'
       },
       {
         id: 3,
-        name: '校长信箱'
+        name: '竞赛成果'
       },
       {
         id: 4,
-        name: '交通路线'
-      },
-      {
-        id: 5,
-        name: '校车路线'
+        name: '竞赛指导'
       }
     ]
   },
   watch: {
     menuList(n, o) {
       this.cont = this.menuList[0].name
-      this.getnews(this.menuList[0]) //改变对象，菜单栏的东西要写到监听属性里边
+      this.item = this.menuList[0]
+      this.getnews(this.menuList[0])
     }
   },
   methods: {
@@ -135,13 +128,15 @@ export default {
             console.log(error)
           })
     },
+    // 跳转到新闻展示页面
     show(item) {
       // console.log(item.id);
-      this.$router.push({path: '/home/news', query: {id: item.id}})
+      this.$router.push({path: '/userHome/news', query: {id: item.id}})
     }
   }
 }
 </script>
+
 <style scoped>
 ul {
   width: 200px;
@@ -163,7 +158,13 @@ li {
   color: #000;
 }
 
-.ql-editor {
-  padding: 12px 0px !important;
+.box-card {
+  height: 500px;
+  position: relative;
+
+  .fenye {
+    position: absolute;
+    bottom: 10px;
+  }
 }
 </style>

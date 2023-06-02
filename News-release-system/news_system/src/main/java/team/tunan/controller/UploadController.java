@@ -4,10 +4,12 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import team.tunan.common.ResponseResult;
@@ -15,14 +17,17 @@ import team.tunan.common.Result;
 import team.tunan.entity.Files;
 import team.tunan.mapper.FileMapper;
 import team.tunan.strategy.context.UploadStrategyContext;
+import team.tunan.vo.R;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 文件上传接口
@@ -33,13 +38,18 @@ import java.util.List;
 @RequestMapping("/file")
 public class UploadController {
 
+    // 上传策略上下文
     private final UploadStrategyContext uploadStrategyContext;
 
+    // 文件mapper
     @Resource
     private FileMapper fileMapper;
+
+    // 文件上传路径
     @Value("${files.upload.path}")
     private String fileUploadPath;
 
+    // 服务器ip
     @Value("${server.ip}")
     private String serverIp;
 
@@ -70,6 +80,30 @@ public class UploadController {
     }
 
     /**
+     * 富文本编辑器文件上传至本地
+     *
+     * @param storageType 存储类型
+     * @param file        文件
+     * @return
+     */
+    @PostMapping("/upload/editor")
+    public Map<String,Object> uploadEditor(MultipartFile file) {
+        return uploadStrategyContext.executeUploadEditorStrategy(file, "/file/", "localUploadServiceImpl");
+    }
+
+    /**
+     * 头像上传至本地
+     *
+     * @param storageType 存储类型
+     * @param file        文件
+     * @return
+     */
+    @PostMapping("/upload/icon")
+    public String uploadIcon(@RequestParam MultipartFile file) {
+        return uploadStrategyContext.executeUploadStrategy(file, "/file/", "localUploadServiceImpl");
+    }
+
+    /**·
      * 分页查询接口
      *
      * @param pageNum  当前页码
@@ -106,6 +140,7 @@ public class UploadController {
 
         // 定义一个文件唯一的标识码
         String fileUUID = IdUtil.fastSimpleUUID() + StrUtil.DOT + type;
+        System.out.println(fileUUID);
 
         File uploadFile = new File(fileUploadPath + fileUUID);
         // 判断配置的文件目录是否存在，若不存在则创建一个新的文件目录
@@ -140,8 +175,7 @@ public class UploadController {
     }
 
     /**
-     * 文件下载接口   http://localhost:9090/file/{fileUUID}
-     *
+     * 文件下载接口
      * @param fileUUID
      * @param response
      * @throws IOException
@@ -149,7 +183,7 @@ public class UploadController {
     @GetMapping("/{fileUUID}")
     public void download(@PathVariable String fileUUID, HttpServletResponse response) throws IOException {
         // 根据文件的唯一标识码获取文件
-        File uploadFile = new File("http://localhost:9090/file/" + fileUUID);
+        File uploadFile = new File(ResourceUtils.getURL("classpath:").getPath() + "static/file/" + fileUUID);
         // 设置输出流的格式
         ServletOutputStream os = response.getOutputStream();
         response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileUUID, "UTF-8"));
@@ -190,6 +224,12 @@ public class UploadController {
         return Result.success();
     }
 
+    /**
+     * 根据md5查询文件
+     *
+     * @param md5 文件的md5
+     * @return 文件
+     */
     private Files getFileByMd5(String md5) {
         // 查询文件的md5是否存在
         QueryWrapper<Files> queryWrapper = new QueryWrapper<>();

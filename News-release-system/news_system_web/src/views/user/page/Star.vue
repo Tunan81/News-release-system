@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import globalTitle from '../GlobalTitle.vue'
+import globalTitle from '../components/GlobalTitle.vue'
 //import request from '@/utils/request'
 
 export default {
@@ -57,34 +57,20 @@ export default {
       },
       {
         id: 2,
-        xueno: '219970103',
-        name: '杜艺',
-        starname: '优秀学生',
-        example: '2023年度优秀学生'
-      },
-      {
-        id: 3,
-        xueno: '219970126',
-        name: '沈琪闲',
-        starname: '优秀学生',
-        example: '2023年度优秀学生'
-      },
-      {
-        id: 4,
         xueno: '2018110104',
         name: '赵六',
         starname: '优秀学生',
         example: '2018年度优秀学生'
       },
       {
-        id: 5,
+        id: 3,
         xueno: '2018110105',
         name: '孙七',
         starname: '优秀学生',
         example: '2018年度优秀学生'
       },
       {
-        id: 6,
+        id: 4,
         xueno: '2018110106',
         name: '周八',
         starname: '优秀学生',

@@ -1,7 +1,5 @@
 package team.tunan.utils;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +7,7 @@ import java.util.regex.Pattern;
 /**
  * @author Tunan
  * @version 1.0
+ * @date 2023/5/31 20:00
  */
 public class StringUtil {
     /**
@@ -25,7 +24,20 @@ public class StringUtil {
     }
 
     /**
+     * 手机号校验
+     *
+     * @param phone 手机号
+     */
+    public static boolean checkPhone(String phone) {
+        String check = "^1[3-9]\\d{9}$";
+        Pattern regex = Pattern.compile(check);
+        Matcher matcher = regex.matcher(phone);
+        return matcher.matches();
+    }
+
+    /**
      * 密码校验（长度 6-18，至少包含1个字母）
+     *
      * @param password
      * @return
      */
@@ -41,13 +53,6 @@ public class StringUtil {
      */
     public static String randomSixCode() {
         return String.valueOf(new Random().nextInt(899999) + 100000);
-    }
-
-    /**
-     * 随机生成加密盐（4位随机字母 + 4位固定特殊字符）
-     */
-    public static String randomEncryptedSalt() {
-        return RandomStringUtils.randomAlphabetic(4) + "#!$@";
     }
 
 

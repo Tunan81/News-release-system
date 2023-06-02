@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import globalTitle from '@/views/front/GlobalTitle.vue'
+import globalTitle from '@/views/user/components/GlobalTitle.vue'
 export default {
   components: { globalTitle },
   name: 'Info',

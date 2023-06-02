@@ -24,5 +24,9 @@ public interface IUserService extends IService<User> {
 
     User getUserInfo(UserDTO userDTO);//获取用户信息
 
-    R findPassword(LoginParam loginParam);//找回密码
+    User getUserInfoById(UserDTO userDTO);//通过手机号获取用户信息
+
+    R findPassword(LoginParam loginParam);//通过邮箱找回密码
+
+    R findPasswordByPhone(LoginParam loginParam);//通过手机找回密码
 }
