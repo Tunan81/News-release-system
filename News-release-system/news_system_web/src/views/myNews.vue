@@ -37,14 +37,25 @@
       <el-table-column prop="id" label="编号" ></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column prop="type" label="类型"></el-table-column>
-      <el-table-column prop="staus" label="状态">
+      <el-table-column prop="staus" label="发布状态">
         <template slot-scope="scope">
-          <p>启用：
             <el-switch
                 :active-value="1"
                 :inactive-value="0"
                 v-model="scope.row.status"
-                @change="">
+                @change="updateState(scope.row)">
+            </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column prop="isAudit" label="审核状态">
+        <template slot-scope="scope">
+          <p>审核状态：
+            <el-switch
+                :active-value="1"
+                :inactive-value="0"
+                v-model="scope.row.isAudit"
+                disabled="false"
+                >
             </el-switch>
           </p>
         </template>
@@ -178,6 +189,17 @@ export default {
           this.load()
         } else {
           this.$message.error("批量删除失败")
+        }
+      })
+    },
+    updateState(row) {
+      this.form = row
+      this.request.post("/news/updateStatus", this.form).then(res => {
+        if (res) {
+          this.$message.success("更新成功")
+          this.load()
+        } else {
+          this.$message.error("更新失败")
         }
       })
     },

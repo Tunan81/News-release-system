@@ -41,7 +41,7 @@ export default Vue.extend({
             maxupload: 1, // 限制一次最多上传 1 张图片
             maxFileSize: 100 * 1024 * 1024, // 100M
 
-            base64LimitSize: 5 * 1024, // 5kb 以下插入 base64
+            base64LimitSize: 5 * 1024 * 1024, // 5M 以下插入 base64
             onBeforeUpload(file) {
               console.log('onBeforeUpload', file)
               return file // 返回哪些文件可以上传
@@ -70,9 +70,9 @@ export default Vue.extend({
 
   mounted() {
     // 模拟 ajax 请求，异步渲染编辑器(通常是编辑富文本时传入过来的默认内容)
-    setTimeout(() => {
+/*    setTimeout(() => {
       this.html = '<p>模拟 Ajax 异步设置内容 HTML</p>'
-    }, 1500)
+    }, 1500)*/
   },
 
   methods: {

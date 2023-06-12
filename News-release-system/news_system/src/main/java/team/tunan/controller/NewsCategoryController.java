@@ -30,6 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/newsCategory")
 public class NewsCategoryController {
+
     @Autowired
     ModelMapper modelMapper;
 

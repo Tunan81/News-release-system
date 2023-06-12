@@ -87,10 +87,9 @@ public class UserController {
         return userService.list();
     }
 
-    //新增或修改数据
     @PostMapping
-    public Boolean save(@RequestBody User user) {
-        return userService.saveUser(user);
+    public Result save(@RequestBody User user) {
+        return Result.success(userService.saveOrUpdate(user));
     }
 
     //修改密码
@@ -161,4 +160,19 @@ public class UserController {
         return userService.findPasswordByPhone(loginParam);
     }
 
+    /**
+     * 根据用户名查询用户是否存在
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("/{username}")
+    public Result validateUsername(@PathVariable("username") String username) {
+        Boolean isUsernameValid = userService.validateUsername(username);
+        if (isUsernameValid) {
+            return Result.success();
+        } else {
+            return Result.error(Constants.CODE_400, "用户名已存在");
+        }
+    }
 }

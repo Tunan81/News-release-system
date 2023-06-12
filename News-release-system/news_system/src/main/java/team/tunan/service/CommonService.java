@@ -26,6 +26,7 @@ public interface CommonService {
     R sendEmailCode(LoginParam loginParam);
 
     R getPhoneRequestPermissionCode(String phoneJson);
+
     /**
      * 发送手机验证码
      * @param loginParam （手机号和权限码）

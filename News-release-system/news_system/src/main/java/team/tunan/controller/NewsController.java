@@ -46,6 +46,29 @@ public class NewsController {
         return Result.success();
     }
 
+    @PostMapping("temporary")
+    public Result temporary(@RequestBody News news) {
+        news.setHits(0); // 点击量默认为0
+        news.setReleaseTime(new Date()); // 发布时间
+        newsService.saveOrUpdate(news);
+        return Result.success();
+    }
+
+    @PostMapping("updateStatus")
+    public Boolean updateStatus(@RequestBody News news) {
+        return newsService.updateById(news);
+    }
+
+    @PostMapping("updateAudit")
+    public Boolean updateAudit(@RequestBody News news) {
+        return newsService.updateById(news);
+    }
+
+    @PostMapping("updateTop")
+    public Boolean updateTop(@RequestBody News news) {
+        return newsService.updateNewsTopById(news);
+    }
+
     /**
      * 新增
      * @param news 新闻实体
@@ -111,7 +134,8 @@ public class NewsController {
                            @RequestParam Integer pageSize,
                            @RequestParam(defaultValue = "") String title,
                            @RequestParam(defaultValue = "") String type,
-                           @RequestParam(defaultValue = "") String isAudit) {
+                           @RequestParam(defaultValue = "") String isAudit,
+                           @RequestParam(defaultValue = "") String status) {
         QueryWrapper<News> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
         if (title != null && !"".equals(title)) {
@@ -123,8 +147,10 @@ public class NewsController {
         if (isAudit != null && !"".equals(isAudit)) {
             queryWrapper.eq("status", isAudit);
         }
+        queryWrapper.eq("status", 1);
         return Result.success(newsService.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
+
     /**
      * 分页查询 通过用户id
      * @param pageNum 页码
@@ -167,6 +193,16 @@ public class NewsController {
     @PostMapping("/list")
     public Result pagingQueryListByNewsCategoryId(PagingQueryListByNewsCategoryIdVO vo) {
         return Result.success(newsService.getNewsListByNewsCategoryId(vo.getNewsCategoryId(), vo.getCurrent(), vo.getSize()));
+    }
+
+    /**
+     *  分页查询置顶新闻列表，可指定当前页和每页条数
+     * @param vo 当前页，每页条数
+     * @return 新闻列表
+     */
+    @PostMapping("/top")
+    public Result getTopNews(PagingQueryListByNewsCategoryIdVO vo) {
+       return Result.success(newsService.getTopNewsList(vo.getCurrent(), vo.getSize()));
     }
 
     /**

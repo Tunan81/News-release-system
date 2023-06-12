@@ -1,78 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="4" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c5cfcbe-dfb1-4b71-b867-a885c022e782" name="更改" comment="实现短信找回密码并使用redis存储请求权限码和邮箱验证码，并且修复了一些Bug">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsCategoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/SMSUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/vo/news/category/NewsCategoryListVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/NewsCategory.js" afterDir="false" />
+    <list default="true" id="5c5cfcbe-dfb1-4b71-b867-a885c022e782" name="更改" comment="完善头像上传等功能，并且修复了一大推Bug">
+      <change afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/assets/images/Tu.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/DisplayContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/DisplayContent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/HttpCodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/HttpCodeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/config/InterceptorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/config/InterceptorConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/CommonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/FileController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsCategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UploadController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/LoginParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/LoginParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Dict.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Dict.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsQueryListDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/dto/NewsQueryListDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Files.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Files.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/News.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/NewsCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/NewsCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/exception/ServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/exception/ServiceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/NewsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/mapper/NewsMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/CommonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/CommonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/INewsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/IUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/ThreadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/ThreadService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/CommonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/CommonServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/NewsCategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/NewsCategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/NewsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/NewsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/UploadStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/UploadStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/context/UploadStrategyContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/context/UploadStrategyContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/impl/AbstractUploadStrategyImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/impl/AbstractUploadStrategyImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/DBUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/StringUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/test/java/team/tunan/SendSms.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/test/java/team/tunan/testMD5.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/test/java/team/tunan/testMD5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/TokenUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/TokenUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system/src/main/resources/mapper/AdminMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/api/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/MyEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/components/MyEditor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/utils/date.js" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/utils/date.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Home.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/News.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/News.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Person.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Person.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/RePwd.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Role.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Role.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/User.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/User.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/GlobalTitle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/components/GlobalTitle.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/InfoUs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/InfoUs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/UserHome.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/UserHome.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/notice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/notice.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/other.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/other.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Competition.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Competition.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Education.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Education.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/History.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/History.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Info.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Info.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Introduce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Introduce.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/MapView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/MapView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/News.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/News.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Services.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Services.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/Star.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Star.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/page/moreMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/moreMessage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/school.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/school.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/front/work.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/work.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/myNews.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/myNews.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/publishArticle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/publishArticle.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/test.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/News.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/News.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Star.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/Star.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/News-release-system/news_system_web/src/views/user/page/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +75,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/pom.xml" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/ResponseResult.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/common/Result.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/config/SwaggerConfig.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/CommonController.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/controller/NewsController.java" root0="SKIP_INSPECTION" />
@@ -121,10 +93,12 @@
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/impl/AbstractUploadStrategyImpl.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/impl/CosUploadStrategyImpl.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/strategy/impl/LocalUploadStrategyImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/FileUtil.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/utils/StringUtil.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/java/team/tunan/vo/R.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system/src/main/resources/application.yml" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/App.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/api/user.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/assets/css/my_style.css" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/components/404.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/components/Aside.vue" root0="SKIP_INSPECTION" />
@@ -134,6 +108,7 @@
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/components/backtop.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/components/myFooter.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/router/index.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/store/index.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/File.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/Home.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/News-release-system/news_system_web/src/views/Login.vue" root0="SKIP_INSPECTION" />
@@ -197,29 +172,31 @@
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;ResultTool:SCAN_SERVICE_WITH_LIB&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ToolWindow层次结构.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/basic_java_code/News-release-system/News-release-system/news_system/src/main/java/team/tunan/dto&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/basic_java_code/News-release-system/News-release-system/news_system_web/src/assets/images&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5676173&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;7d60da6f098913e1d79bb702cc2857ae&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\IntelliJ IDEA 2022.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ],
     &quot;vue.recent.templates&quot;: [
       &quot;Vue Options API Component&quot;
     ]
@@ -227,11 +204,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\assets\images" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system\src\main\java\team\tunan\dto" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\assets\icon" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\views\front\page" />
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\components" />
-      <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\assets\front" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\basic_java_code\News-release-system\News-release-system\news_system_web\src\views" />
@@ -397,7 +374,39 @@
       <workItem from="1685664834848" duration="88000" />
       <workItem from="1685664932289" duration="7208000" />
       <workItem from="1685675144414" duration="747000" />
-      <workItem from="1685696834945" duration="13592000" />
+      <workItem from="1685696834945" duration="14284000" />
+      <workItem from="1685747942709" duration="2475000" />
+      <workItem from="1685752049876" duration="6622000" />
+      <workItem from="1685766597299" duration="961000" />
+      <workItem from="1685844099393" duration="3899000" />
+      <workItem from="1685922896235" duration="1760000" />
+      <workItem from="1685937141415" duration="125000" />
+      <workItem from="1685937276967" duration="97000" />
+      <workItem from="1685943053834" duration="78000" />
+      <workItem from="1685947632474" duration="361000" />
+      <workItem from="1685950520095" duration="252000" />
+      <workItem from="1685955606012" duration="2373000" />
+      <workItem from="1685966554830" duration="369000" />
+      <workItem from="1685966995534" duration="5182000" />
+      <workItem from="1685975645318" duration="1429000" />
+      <workItem from="1686037625092" duration="4706000" />
+      <workItem from="1686043467748" duration="184000" />
+      <workItem from="1686138598968" duration="6377000" />
+      <workItem from="1686146515907" duration="7470000" />
+      <workItem from="1686203483814" duration="3290000" />
+      <workItem from="1686206826516" duration="1168000" />
+      <workItem from="1686229769301" duration="91000" />
+      <workItem from="1686276001562" duration="623000" />
+      <workItem from="1686278993154" duration="2134000" />
+      <workItem from="1686361564839" duration="349000" />
+      <workItem from="1686376975518" duration="12474000" />
+      <workItem from="1686447616290" duration="2092000" />
+      <workItem from="1686449724933" duration="1345000" />
+      <workItem from="1686460770997" duration="4134000" />
+      <workItem from="1686484562435" duration="3880000" />
+      <workItem from="1686537253372" duration="2410000" />
+      <workItem from="1686559412846" duration="711000" />
+      <workItem from="1686560232832" duration="11802000" />
     </task>
     <task id="LOCAL-00001" summary="对新闻模块进行了修改，并增加了Echarts">
       <created>1684681258718</created>
@@ -434,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685520323672</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="完善头像上传等功能，并且修复了一大推Bug">
+      <created>1685716611478</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685716611478</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +476,8 @@
     <MESSAGE value="使用策略模式实现多种方式的文件上传，并且修复了一些Bug" />
     <MESSAGE value="完善了富文本，以及文件上传，下载，并且修复了一些Bug" />
     <MESSAGE value="实现短信找回密码并使用redis存储请求权限码和邮箱验证码，并且修复了一些Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="实现短信找回密码并使用redis存储请求权限码和邮箱验证码，并且修复了一些Bug" />
+    <MESSAGE value="完善头像上传等功能，并且修复了一大推Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善头像上传等功能，并且修复了一大推Bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

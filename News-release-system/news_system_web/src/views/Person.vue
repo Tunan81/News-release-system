@@ -17,6 +17,24 @@
       <el-form-item label="邮箱">
         <el-input v-model="form.email" autocomplete="off"></el-input>
       </el-form-item>
+      <el-form-item label="手机号">
+        <el-input v-model="form.phone" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="学历">
+        <el-input v-model="form.degree" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="性别">
+        <el-radio-group v-model="form.sex">
+          <el-radio label="男">男</el-radio>
+          <el-radio label="女">女</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="爱好">
+        <el-input v-model="form.hobbit" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="自我介绍">
+        <el-input v-model="form.note" type="textarea" autocomplete="off"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="save">确 定</el-button>
       </el-form-item>
@@ -45,7 +63,7 @@ export default {
     },
     save() {
       this.request.post("/user", this.form).then(res => {
-        if (res.code === '200') {
+        if (res.code == "200") {
           this.$message.success("保存成功")
           // 触发父级更新User的方法
           this.$emit("refreshUser")

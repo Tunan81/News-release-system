@@ -1,32 +1,14 @@
 import request from '@/utils/request'
 
+
+export const userRules = data => {
+    return request({
+        method: 'GET',
+        url: `/user/${data}`
+    })
+}
+
 export default {
-    /**
-     * 1.登录
-     * @param {*} param
-     * @returns
-     */
-    login(param) {
-        return request({
-            url: '/user/login',
-            method: 'post',
-            data: param
-        })
-    },
-
-    /**
-     * 2.注册
-     * @param {*} param
-     * @returns
-     */
-    register(param) {
-        return request({
-            url: '/user/register',
-            method: 'post',
-            data: param
-        })
-    },
-
     /**
      * 找回密码
      * @param {*} param

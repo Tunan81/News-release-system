@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface INewsService extends IService<News> {
 
-    String PICTURE_PATH = "picture_path";
+    String COVER_IMAGE = "cover_image";
 
     String ID = "id";
 
@@ -32,13 +32,24 @@ public interface INewsService extends IService<News> {
     String CREATE_TIME = "create_time";
 
     String UPDATE_TIME = "update_time";
+
+    String TOP = "top";
+
+    String IS_AUDIT = "is_audit";
+
     /**
      * 根据 NEWS_CATEGORY_ID 获取 新闻展示列表
      */
     NewsPaging getNewsListByNewsCategoryId(Integer newsCategoryId, Integer current, Integer size);
 
+    //获取热门新闻
+    NewsPaging getTopNewsList(Integer current, Integer size);
     /**
      * 根据 ID 获取 新闻详情
      */
     NewsQueryDTO getNewsById(Integer id);
+
+    Boolean updateNewsTopById(News news);
+
+
 }

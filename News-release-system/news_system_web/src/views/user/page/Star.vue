@@ -32,8 +32,6 @@
 
 <script>
 import globalTitle from '../components/GlobalTitle.vue'
-//import request from '@/utils/request'
-
 export default {
   components: { globalTitle },
   name: 'Star',
@@ -95,17 +93,6 @@ export default {
       this.currentpage = pageNum
       this.load()
     }
-    /*  //加载数据
-      load() {
-        //发送请求
-        request.get('/XdStar/all'
-        ).then(res => {
-          if (res.code === 200) {
-            this.tableData = res.data
-          }
-
-        })
-      },*/
   }
 }
 </script>

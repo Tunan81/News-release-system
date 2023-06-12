@@ -17,8 +17,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public enum DisplayContent {
+
     NEWS_LIST(0, "新闻列表"),
+
     NEWS(1, "新闻"),
+
     LINK(2, "链接");
 
     @EnumValue

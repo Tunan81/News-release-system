@@ -15,7 +15,6 @@ public enum HttpCodeEnum {
 
     //======================= 通用枚举 ==============================
     EMAIL_ERROR(4001, "邮箱格式不正确"),
-
     PHONE_ERROR(4001, "手机号格式不正确"),
     PARAM_ERROR(4002, "参数格式不正确"),
     CODE_ERROR(4002, "验证码不正确"),
@@ -24,7 +23,6 @@ public enum HttpCodeEnum {
     EMAIL_ALREADY_EXIST(4005, "邮箱已被注册"),
     PASSWORD_INCONSISTENT(4006, "密码不一致"),
     PARAM_ILLEGAL(4007, "参数不合法"),
-
     INTERNAL_SERVER_ERROR(500, "服务器异常"),
     ILLEGAL_OPERATION(88888, "非法操作"),
 

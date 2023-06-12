@@ -1,6 +1,5 @@
 <template>
   <div class='box'>
-    <!--    <p>{{ this.$route.query.id }}</p>-->
     <div class='header'>
       <h2>{{ title }}</h2>
       <p>发布日期：{{ releaseTime }} 点击量：[ {{ hits }} ]</p>

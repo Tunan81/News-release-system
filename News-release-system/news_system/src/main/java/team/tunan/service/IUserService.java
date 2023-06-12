@@ -29,4 +29,7 @@ public interface IUserService extends IService<User> {
     R findPassword(LoginParam loginParam);//通过邮箱找回密码
 
     R findPasswordByPhone(LoginParam loginParam);//通过手机找回密码
+
+    Boolean validateUsername(String username);//判断用户名是否可用
+
 }

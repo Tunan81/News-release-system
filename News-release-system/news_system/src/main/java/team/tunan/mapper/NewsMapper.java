@@ -6,9 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import team.tunan.entity.News;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
  *
  * @author Tunan
  * @since 2023-05-08
@@ -17,5 +14,4 @@ import team.tunan.entity.News;
 public interface NewsMapper extends BaseMapper<News> {
     //根据userid查询
     IPage<News> selectByUserId(IPage<News> page, Integer userId);
-
 }

@@ -2,13 +2,11 @@ package team.tunan.service.impl;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.crypto.digest.MD5;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -31,7 +29,6 @@ import team.tunan.vo.R;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -181,6 +178,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             one.setAvatar("https://tunan81-images-1313478973.cos.ap-chengdu.myqcloud.com/InitialHead.jpg");
             one.setSex("男"); // 默认性别为男
             one.setStatus(1); // 默认状态为启用
+            one.setRole("EDITOR"); // 默认角色为普通用户
             one.setPassword(DigestUtils.md5Hex(userDTO.getPassword())); // 对密码进行加密
             save(one);  // 把 copy完之后的用户对象存储到数据库
         } else {
@@ -319,5 +317,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         user1.setUserId(user.getUserId());
         user1.setPassword(DigestUtils.md5Hex(password));
         return this.baseMapper.updateById(user1) == 0 ? R.error(HttpCodeEnum.UNKNOWN_ERROR) : R.ok();
+    }
+
+    @Override
+    public Boolean validateUsername(String username) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        User one;
+        try {
+            one = getOne(queryWrapper); // 从数据库查询用户信息
+        } catch (Exception e) {
+            LOG.error(e);
+            return false;
+        }
+        return one == null;
     }
 }

@@ -1,25 +1,13 @@
 <template>
   <div style="margin-left: 25vh;">
     <!-- 首页上半部分 -->
-    <el-row type='flex' justify='space-between'>
+    <el-row type='flex'>
       <div class='block marr10' style="padding:0px 20px 5px 0px;">
         <el-carousel height='410px' arrow='always' :interval='3000'>
-          <el-carousel-item>
-            <div class='cursor' style='width:100%; height:100%'>
-              <img src="~@/assets/lb_01.jpg" style='width:100%; height:100%'>
-              <div class='title'>喜报！学校荣获“重庆五一劳动..</div>
-            </div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div class='cursor' style='width:100%; height:100%'>
-              <img src="~@/assets/lb_02.jpg" style='width:100%; height:100%'>
-              <div class='title'>国科大第二届卓越工程师班举行..</div>
-            </div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div class='cursor' style='width:100%; height:100%'>
-              <img src="~@/assets/lb_03.jpg" style='width:100%; height:100%'>
-              <div class='title'>学校召开学习贯彻习近平新时代..</div>
+          <el-carousel-item v-for='(item, index) in TopNewsList' :key='index'>
+            <div @click='gonew(item.id)' class='cursor' style='width:590px; height:450px'>
+              <img :src="item.coverImage" alt='' style='width:100%; height:90%'/>
+              <div class='title'>{{ item.title }}</div>
             </div>
           </el-carousel-item>
         </el-carousel>
@@ -32,7 +20,6 @@
       <school class='school'/>
       <other class='other'/>
     </el-row>
-
     <!-- 定位fixed -->
     <div class='fixed1'>
       <a @click="$router.push('/InfoUs')"><img src='~@/assets/front/phone.jpg' alt=''/></a>
@@ -47,56 +34,54 @@ import notice from '../notice.vue'
 import work from '../work.vue'
 import school from '../school.vue'
 import other from '../other.vue'
-
-//import { getNewsList } from '../../api/api'
+import {getTopNewsList} from "@/api/api";
 
 export default {
   components: {notice, work, school, other},
   name: 'index',
   data() {
     return {
-      imgList: []
+      TopNewsList: []
     }
   },
   created() {
-    //this.getnews()
+    this.getnews()
   },
   methods: {
-    /*    getnews() {
-          const data = {
-            current: 1,
-            newsCategoryId: 16,
-            size: 3
-          }
-          getNewsList(data)
-              .then(res => {
-                console.log(res)
-                if (res.code == 200) {
-                  this.imgList = res.data.records
-                }
-              })
-              .catch(err => {
-                console.log(err)
-              })
-        },*/
-    /*    gonew(id) {
-          this.$router.push({ path: '/home/news', query: { id: id } })
-        }*/
+    gonew(id) {
+      this.$router.push({path: '/userhome/news', query: {id: id}})
+    },
+    getnews() {
+      const data = {
+        current: 1,
+        size: 5
+      }
+      getTopNewsList(data)
+          .then(res => {
+            console.log(res)
+            if (res.code == 200) {
+              this.TopNewsList = res.data.records
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    }
   }
 }
 </script>
 <style scoped>
 .block {
-  width: 60%;
+  width: 50%;
 }
 
 .title {
   position: absolute;
-  bottom: 0px;
+  bottom: 6px;
   left: 0;
   width: 100%;
   height: 12%;
-  padding: 2px;
+  padding: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 18px;

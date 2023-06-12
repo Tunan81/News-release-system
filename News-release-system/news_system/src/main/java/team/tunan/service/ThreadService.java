@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ThreadService {
+
     @Autowired
     private MailService mailService;
 

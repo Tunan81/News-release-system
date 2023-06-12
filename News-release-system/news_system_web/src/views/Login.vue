@@ -7,9 +7,6 @@
       <el-form-item prop="username">
         <el-input type="text" v-model="loginUser.username" placeholder="亲，请输入用户名">
         </el-input>
-        <div v-if="isDuplicate" style="color: red; font-size: 12px;">
-          用户名已存在
-        </div>
       </el-form-item>
       <el-form-item prop="password">
         <el-input type="password" v-model="loginUser.password" placeholder="亲，请输入密码" show-password>
@@ -30,10 +27,10 @@
       </el-form-item>
       <div style="margin-bottom: 20px;margin-top: 0px">
         <a href="./register" style="margin-left:0px;text-decoration: none;color: #4f84d4">立即注册</a>
-        <!--        <span @click="dialogFormVisible = true"
-                      style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>-->
-        <span @click="phoneDialogVisible = true"
-              style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>
+                <span @click="dialogFormVisible = true"
+                      style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>
+<!--        <span @click="phoneDialogVisible = true"
+              style="margin-left: 170px;text-decoration: none;color: #4f84d4">忘记密码?</span>-->
       </div>
       <el-button type="primary" style="width:100%;margin-bottom: 5px" @click="UserLogin">登录</el-button>
       <br>
@@ -89,7 +86,11 @@
         <el-form-item label="验证码" prop="code">
           <el-row :gutter="10">
             <el-col :span="14">
-              <el-input prefix-icon="el-icon-key" placeholder="请填写6位数字验证码" type="number" maxlength="6"
+              <el-input prefix-icon="el-icon-key"
+                        placeholder="请填写6位数字验证码"
+                        type="number"
+                        maxlength="6"
+                        suffix-icon=""
                         v-model="phoneFindPasswordForm.code"></el-input>
             </el-col>
             <el-col :span="10">
@@ -198,7 +199,6 @@ export default {
         password: [{validator: password, trigger: 'blur'}],
         phone: [{validator: phone, trigger: 'blur'}],
       },
-      isDuplicate: false // 初始化为未重复
     }
   },
   mounted() {
@@ -286,7 +286,6 @@ export default {
               clearInterval(this.timer);
             }
           }, 1000);
-
           // 发送验证码请求
           common.getRequestCode(this.findPasswordForm.email).then(_ => {
             common.getEmailCode(this.findPasswordForm.email, _.data.permissionCode).then(_ => {
@@ -368,7 +367,7 @@ export default {
   margin: 180px auto;
   width: 380px;
   padding: 15px 35px 15px 35px;
-  background: #dfe0cd;
+  background: #d3e6e3;
   border: 1px solid #99ccd1;
 }
 
@@ -384,17 +383,8 @@ export default {
   margin: 0px 0px 15px 0px;
 }
 
-.login input::-webkit-outer-spin-button,
-.login input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-.login input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 .userLogin {
-  background-image: url("@/assets/images/userLogin.png");
+  background-image: url("@/assets/images/Tu.png");
   width: 100%;
   height: 100%;
   position: fixed;
@@ -414,5 +404,13 @@ span {
 
 .el-dialog {
   padding: 0px 50px;
+}
+
+::v-deep input::-webkit-outer-spin-button,
+::v-deep input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+::v-deep input[type=‘number’] {
+  -moz-appearance: textfield !important;
 }
 </style>

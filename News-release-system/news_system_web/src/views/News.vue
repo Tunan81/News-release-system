@@ -38,12 +38,12 @@
       <el-table-column prop="userId" label="发布人id"></el-table-column>
       <el-table-column prop="isAudit" label="审核状态">
         <template slot-scope="scope">
-          <p>启用：
+          <p>审核：
             <el-switch
                 :active-value="1"
                 :inactive-value="0"
                 v-model="scope.row.isAudit"
-                @change="">
+                @change="updateAudit(scope.row)">
             </el-switch>
           </p>
         </template>
@@ -55,7 +55,7 @@
                 :active-value="1"
                 :inactive-value="0"
                 v-model="scope.row.top"
-                @change="">
+                @change="updateTop(scope.row)">
             </el-switch>
           </p>
         </template>
@@ -112,7 +112,7 @@ export default {
       tableData: [],
       total: 0,
       pageNum: 1,
-      pageSize: 8,
+      pageSize: 10,
       id: "",
       title: "",
       content: "",
@@ -135,7 +135,7 @@ export default {
           pageSize: this.pageSize,
           title: this.title,
           type: this.type,
-          isAudit: this.isAudit
+          isAudit: this.isAudit,
         }
       }).then(res => {
         //console.log(res)
@@ -187,6 +187,30 @@ export default {
           this.load()
         } else {
           this.$message.error("批量删除失败")
+        }
+      })
+    },
+    updateAudit(row){
+      this.form = row
+      this.request.post("/news/updateAudit", this.form).then(res => {
+        if (res) {
+          this.$message.success("修改成功")
+          this.load()
+        } else {
+          row.isAudit = 0
+          this.$message.error("修改失败")
+        }
+      })
+    },
+    updateTop(row){
+      this.form = row
+      this.request.post("/news/updateTop", this.form).then(res => {
+        if (res) {
+          this.$message.success("修改成功")
+          this.load()
+        } else {
+          row.top = 0
+          this.$message.error("热门新闻太多啦！")
         }
       })
     },
